@@ -58,6 +58,24 @@ h3 {
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
+  padding: 160px 0;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 20px 48px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid #E5595B;
+  border-radius: 32px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  border-color: #FFC779;
 }
 
 </style>

@@ -1,31 +1,32 @@
 <template>
+  <div class="gallery-bg">
+    <div class="container">
+      <h2>Jak to u nás vypadá?</h2>
+      <div class="gallery">
+        <img
+          v-for="(img, i) in images"
+          :key="i"
+          :src="img"
+          class="w-full h-auto rounded shadow cursor-pointer hover:scale-105 transition"
+          @click="gallery.open(img)"
+        />
+      </div>
 
-  <div class="container">
-    <h2>Jak to u nás vypadá?</h2>
-    <div class="gallery">
-      <img
-        v-for="(img, i) in images"
-        :key="i"
-        :src="img"
-        class="w-full h-auto rounded shadow cursor-pointer hover:scale-105 transition"
-        @click="gallery.open(img)"
-      />
-    </div>
-
-    <!-- Lightbox -->
-    <div
-      v-if="gallery.selectedImage"
-      class="fullscreen fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-      @click.self="gallery.close"
-    >
-      <div class="relative max-w-3xl w-full">
-        <img :src="gallery.selectedImage" alt="" class="w-full rounded shadow-lg" />
-        <button
-            @click="gallery.close"
-            class="absolute top-2 right-2 text-white text-3xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-70 transition"
-        >
-          ×
-        </button>
+      <!-- Lightbox -->
+      <div
+        v-if="gallery.selectedImage"
+        class="fullscreen fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+        @click.self="gallery.close"
+      >
+        <div class="relative max-w-3xl w-full">
+          <img :src="gallery.selectedImage" alt="" class="w-full rounded shadow-lg" />
+          <button
+              @click="gallery.close"
+              class="btn absolute top-2 right-2 text-white text-3xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-70 transition"
+          >
+            ×
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -42,11 +43,22 @@
       '/images/gallery/2.png',
       '/images/gallery/3.png',
       '/images/gallery/4.png',
+      '/images/gallery/2.png',
+      '/images/gallery/1.png',
   ]
 
 </script>
 
-<style>
+<style scoped>
+
+.gallery-bg {
+  background-color: #FFF8ED;
+  background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  color: #333;
+}
 
 .gallery {
   display: grid;
@@ -60,6 +72,7 @@
   max-width: 420px;
   width: 100%;
   border-radius: 16px;
+  cursor: pointer;
 }
 
 .fullscreen {
@@ -70,6 +83,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.fullscreen div {
+  position: relative;
+}
+
+.btn {
+  position: absolute;
+  margin-top: 0;
 }
 
 </style>

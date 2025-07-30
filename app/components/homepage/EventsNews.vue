@@ -2,7 +2,7 @@
 
   <section id="onas" class="features">
     <div class="container">
-      <h2>Na co se u nás můžete těšit?</h2>
+      <h2>Akce a aktuality</h2>
 
       <div class="cards">
 
@@ -36,10 +36,9 @@ import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue
 
 .features {
   background-color: #FFF8ED;
-  /* background-image: url('https://placehold.co/600x400'); /* pozadí */
+  background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 180px 0;
   text-align: center;
   color: #333;
 }

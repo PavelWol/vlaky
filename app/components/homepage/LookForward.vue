@@ -53,7 +53,6 @@ export default defineComponent({
   /* background-image: url('https://placehold.co/600x400'); /* pozadí */
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 180px 0;
   text-align: center;
   color: #333;
 }

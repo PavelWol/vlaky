@@ -28,11 +28,10 @@
 
 .story {
   background-color: #fff5ec;
-  background-image: url('https://placehold.co/600x400'); /* pozadí */
+  background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  padding: 180px 0;
   color: #353535;
 }
 
