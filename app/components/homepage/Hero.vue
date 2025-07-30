@@ -2,15 +2,6 @@
 
   <header class="hero">
     <div class="overlay"></div>
-    <nav class="navbar">
-      <img src="https://placehold.co/600x400" alt="Logo" class="logo"> <!-- logo -->
-      <ul class="nav-links">
-        <li><a href="#onas">O nás</a></li>
-        <li><a href="#cenik">Ceník</a></li>
-        <li><a href="#drezina">Drezina</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-      </ul>
-    </nav>
 
     <div class="hero-content">
       <h1>Železniční park <span class="highlight">plný zábavy!</span></h1>
@@ -51,43 +42,7 @@
   z-index: -1;
 }
 
-/* Navigace */
-.navbar {
-  width: 100%;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
-  position: relative;
-  z-index: 2;
-}
 
-.logo {
-  width: 118px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  margin: 0;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #FFC779;
-}
 
 /* Obsah uprostřed */
 .hero-content {
@@ -121,3 +76,5 @@
 
 
 </style>
+<script setup lang="ts">
+</script>

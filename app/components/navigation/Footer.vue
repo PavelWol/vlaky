@@ -59,6 +59,10 @@
 
 <style scoped>
 
+footer .container {
+  padding: 0;
+}
+
 footer {
   padding: 64px 0;
   background-color: #AE4343;

@@ -26,6 +26,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKey))
 <template>
   <!-- Galerie -->
   <div class="container">
+    <h2>Jak to u nás vypadá?</h2>
     <div class="gallery">
       <img
           v-for="(img, i) in gallery.images"
@@ -94,6 +95,11 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKey))
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+h2 {
+  text-align: center;
+  color: #AE4343;
 }
 
 .gallery {

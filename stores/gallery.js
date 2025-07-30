@@ -3,11 +3,11 @@ export const useGalleryStore = defineStore('gallery', {
         selectedIndex: null,
         images: [
             { src: '/images/gallery/1.png', caption: 'První obrázek' },
-            { src: '/images/gallery/1.png', caption: 'Druhý obrázek' },
-            { src: '/images/gallery/1.png', caption: 'Třetí obrázek' },
-            { src: '/images/gallery/1.png', caption: 'Čtvrtý obrázek' },
+            { src: '/images/gallery/2.png', caption: 'Druhý obrázek' },
+            { src: '/images/gallery/3.png', caption: 'Třetí obrázek' },
+            { src: '/images/gallery/4.png', caption: 'Čtvrtý obrázek' },
             { src: '/images/gallery/1.png', caption: 'Pátý obrázek' },
-            { src: '/images/gallery/1.png', caption: 'Šestý obrázek' },
+            { src: '/images/gallery/2.png', caption: 'Šestý obrázek' },
         ]
     }),
     getters: {
