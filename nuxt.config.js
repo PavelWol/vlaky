@@ -8,7 +8,7 @@ export default defineNuxtConfig({
 
   css: [],
 
-  modules: [],
+  modules: ["@pinia/nuxt"],
 
   build: {},
 
@@ -34,6 +34,8 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com" },
+        {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap'},
+        {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Paytone+One&family=Readex+Pro:wght@160..700&display=swap'}
       ],
       script: [
         {
