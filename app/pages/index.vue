@@ -4,6 +4,7 @@
     <OurStory />
     <LookForward />
     <EventsNews />
+    <Gallery />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import Hero from '~/components/homepage/Hero.vue'
 import OurStory from '~/components/homepage/OurStory.vue'
 import LookForward from '~/components/homepage/LookForward.vue'
 import EventsNews from "~/components/homepage/EventsNews.vue";
+import Gallery from "~/components/homepage/Gallery.vue";
 
 </script>
 

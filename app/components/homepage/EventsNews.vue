@@ -9,28 +9,27 @@
         <LookForwardItem
           image="https://placehold.co/600x400"
           heading="Historický motorák"
-          text="Naskočte do vláčku, který pamatuje staré časy! Podívejte se do kabiny strojvedoucího a splňte si dětský sen alespoň na chvíli."
         />
 
         <LookForwardItem
           image="https://placehold.co/600x400"
           heading="Zábavní park"
-          text="Skákací hrad, herní vagón, kolotoč i pískový svět - u nás si děti pořádně vyhrají a rodiče si odpočinou ve stínu lesíka."
         />
 
         <LookForwardItem
           image="https://placehold.co/600x400"
           heading="Šlapací drezína"
-          text="Nasedněte, šlápněte a hurá na výlet! Naše šlapací drezína je ideální pro rodinnou zábavu s kapkou pohybu."
         />
 
       </div>
+      <SecondaryButton></SecondaryButton>
     </div>
   </section>
 
 </template>
 <script setup lang="ts">
 import LookForwardItem from "~/components/interactive/LookForwardItem.vue";
+import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
 </script>
 
 <style scoped>

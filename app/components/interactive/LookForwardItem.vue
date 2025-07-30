@@ -3,7 +3,7 @@
   <div class="card">
     <img :src="image" :alt="heading">
     <h3>{{ heading }}</h3>
-    <p>{{ text }}</p>
+    <p v-if="text">{{ text }}</p>
   </div>
 </template>
 
