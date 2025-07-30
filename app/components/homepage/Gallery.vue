@@ -1,63 +1,99 @@
-<template>
-  <div class="gallery-bg">
-    <div class="container">
-      <h2>Jak to u nás vypadá?</h2>
-      <div class="gallery">
-        <img
-          v-for="(img, i) in images"
-          :key="i"
-          :src="img"
-          class="w-full h-auto rounded shadow cursor-pointer hover:scale-105 transition"
-          @click="gallery.open(img)"
-        />
-      </div>
+<script setup>
+import { useGalleryStore } from '~~/stores/gallery'
+import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
 
-      <!-- Lightbox -->
-      <div
-        v-if="gallery.selectedImage"
-        class="fullscreen fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-        @click.self="gallery.close"
-      >
-        <div class="relative max-w-3xl w-full">
-          <img :src="gallery.selectedImage" alt="" class="w-full rounded shadow-lg" />
-          <button
-              @click="gallery.close"
-              class="btn absolute top-2 right-2 text-white text-3xl font-bold bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-70 transition"
-          >
-            ×
-          </button>
-        </div>
-      </div>
+const gallery = useGalleryStore()
+const fade = ref(false)
+
+// Animace při změně obrázku
+watch(() => gallery.selectedImage, () => {
+  fade.value = false
+  setTimeout(() => (fade.value = true), 100)
+})
+
+// Klávesové ovládání
+const handleKey = (e) => {
+  if (!gallery.selectedImage) return
+  if (e.key === 'ArrowRight') gallery.next()
+  if (e.key === 'ArrowLeft') gallery.prev()
+  if (e.key === 'Escape') gallery.close()
+}
+
+onMounted(() => window.addEventListener('keydown', handleKey))
+onBeforeUnmount(() => window.removeEventListener('keydown', handleKey))
+</script>
+
+<template>
+  <!-- Galerie -->
+  <div class="container">
+    <div class="gallery">
+      <img
+          v-for="(img, i) in gallery.images"
+          :key="i"
+          :src="img.src"
+          :alt="img.caption"
+          class=""
+          @click="gallery.open(i)"
+      />
     </div>
   </div>
 
+  <!-- Lightbox -->
+  <div
+      v-if="gallery.selectedImage"
+      class="fullscreen"
+      @click.self="gallery.close"
+  >
+    <div class="">
+      <!-- Obrázek s fade-in animací -->
+      <transition name="fade">
+        <img
+            v-if="fade"
+            :src="gallery.selectedImage.src"
+            class="w-full rounded shadow-lg"
+            :alt="gallery.selectedImage.caption"
+        />
+      </transition>
+
+      <!-- Popis obrázku -->
+      <div class="mt-4 text-center text-sm opacity-80">
+        <p>{{ gallery.selectedImage.caption }}</p>
+        <p>{{ gallery.selectedIndex + 1 }} / {{ gallery.images.length }}</p>
+      </div>
+
+      <!-- Zavřít -->
+      <button
+          @click="gallery.close"
+          class=""
+      >
+        ×
+      </button>
+
+      <!-- Předchozí -->
+      <button
+          @click="gallery.prev"
+          class=""
+      >
+        ‹
+      </button>
+
+      <!-- Další -->
+      <button
+          @click="gallery.next"
+          class=""
+      >
+        ›
+      </button>
+    </div>
+  </div>
 </template>
 
-<script setup lang="js">
-
-  import { useGalleryStore} from "~~/stores/gallery.js";
-  const gallery = useGalleryStore();
-
-  const images = [
-      '/images/gallery/1.png',
-      '/images/gallery/2.png',
-      '/images/gallery/3.png',
-      '/images/gallery/4.png',
-      '/images/gallery/2.png',
-      '/images/gallery/1.png',
-  ]
-
-</script>
-
 <style scoped>
-
-.gallery-bg {
-  background-color: #FFF8ED;
-  background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
-  background-repeat: no-repeat;
-  background-size: cover;
-  text-align: center;
-  color: #333;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 250ms ease-in-out
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 
 .gallery {
@@ -69,29 +105,19 @@
 }
 
 .gallery img {
+  cursor: pointer;
   max-width: 420px;
   width: 100%;
   border-radius: 16px;
-  cursor: pointer;
 }
 
 .fullscreen {
   position: fixed;
   inset: 0;
-  z-index: 50;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  z-index: 50;
 }
-
-.fullscreen div {
-  position: relative;
-}
-
-.btn {
-  position: absolute;
-  margin-top: 0;
-}
-
 </style>

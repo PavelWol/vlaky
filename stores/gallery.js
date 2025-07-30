@@ -1,15 +1,34 @@
-import { defineStore } from 'pinia'
-
 export const useGalleryStore = defineStore('gallery', {
     state: () => ({
-            selectedImage: null,
-        }),
+        selectedIndex: null,
+        images: [
+            { src: '/images/gallery/1.png', caption: 'První obrázek' },
+            { src: '/images/gallery/1.png', caption: 'Druhý obrázek' },
+            { src: '/images/gallery/1.png', caption: 'Třetí obrázek' },
+            { src: '/images/gallery/1.png', caption: 'Čtvrtý obrázek' },
+            { src: '/images/gallery/1.png', caption: 'Pátý obrázek' },
+            { src: '/images/gallery/1.png', caption: 'Šestý obrázek' },
+        ]
+    }),
+    getters: {
+        selectedImage: (state) =>
+            state.selectedIndex !== null ? state.images[state.selectedIndex] : null
+    },
     actions: {
-        open(img) {
-            this.selectedImage = img
+        open(index) {
+            this.selectedIndex = index
         },
         close() {
-            this.selectedImage = null
+            this.selectedIndex = null
+        },
+        next() {
+            if (this.selectedIndex === null) return
+            this.selectedIndex = (this.selectedIndex + 1) % this.images.length
+        },
+        prev() {
+            if (this.selectedIndex === null) return
+            this.selectedIndex =
+                (this.selectedIndex - 1 + this.images.length) % this.images.length
         }
     }
 })
