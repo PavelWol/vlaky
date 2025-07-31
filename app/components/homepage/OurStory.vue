@@ -2,12 +2,21 @@
 
   <section id="story" class="story">
     <div class="container">
-      <h2>Náš příběh</h2>
-      <p>
-        Naše železniční dobrodružství se zrodilo na části trati Čejč–Ždánice, která zůstala zachována z Čejče do Uhřic u Kyjova a
-        kterou jsme oživili s láskou k historii i hravosti. Společnost TMŽ s.r.o. si dala za cíl
-        vytvořit místo, kde se potkává rodinná zábava, vůně dobrodružství a příběhy ze světa vlaků.
-      </p>
+      <SectionHeading
+          color="red"
+          align="center"
+      >
+        <template #title>
+          <h2>Náš příběh</h2>
+        </template>
+        <template #subtitle>
+          <p>
+            Naše železniční dobrodružství se zrodilo na části trati Čejč–Ždánice, která zůstala zachována z Čejče do Uhřic u Kyjova a
+            kterou jsme oživili s láskou k historii i hravosti. Společnost TMŽ s.r.o. si dala za cíl
+            vytvořit místo, kde se potkává rodinná zábava, vůně dobrodružství a příběhy ze světa vlaků.
+          </p>
+        </template>
+      </SectionHeading>
       <img src="https://placehold.co/600x400" alt="Šlapací drezína" class="story-img">
       <p>
         S pomocí Jirky Kotase a nadšenců z Klubu přátel kolejových vozidel z Brna a historických kousků z jeho sbírky získal
@@ -24,6 +33,12 @@
 
 </template>
 
+<script setup lang="js">
+
+import SectionHeading from "~/components/ui/SectionHeading.vue";
+
+</script>
+
 <style>
 
 .story {
@@ -35,10 +50,6 @@
   color: #353535;
 }
 
-.story h2 {
-  color: #AE4343;
-  font-size: 64px;
-}
 
 .story p {
   font-size: 24px;

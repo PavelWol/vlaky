@@ -31,7 +31,7 @@ import ContactInfo from "~/components/table/ContactInfo.vue";
   padding-top: 80px;
 }
 
-h2 {
+.cenik-page h2 {
   line-height: 180%;
   color: #AE4343;
 }
