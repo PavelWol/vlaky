@@ -4,7 +4,7 @@
       <NuxtLink to="/">
         <img :src="logoSrc" alt="Logo" class="logo" />
       </NuxtLink>
-      <div>
+      <div class="desktop-nav">
         <NuxtLink
             v-for="link in navLinks"
             :key="link.to"
@@ -19,6 +19,7 @@
         </NuxtLink>
       </div>
       <a href="" class="btn">Rezervace</a>
+      <MobileMenu />
     </nav>
   </div>
 </template>
@@ -26,6 +27,7 @@
 
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
+import MobileMenu from '~/components/navigation/MobileMenu.vue'
 
 const route = useRoute()
 const logoSrc = computed(() =>
@@ -123,6 +125,14 @@ const navLinks = [
 
 .white {
   color: #ffffff !important;
+}
+
+@media (max-width: 1024px) {
+
+  .desktop-nav {
+    display: none;
+  }
+
 }
 
 </style>
