@@ -20,6 +20,10 @@ import Gallery from "~/components/homepage/Gallery.vue";
 
 <style>
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
@@ -85,6 +89,32 @@ h3 {
 
 .btn:hover {
   border-color: #FFC779;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 56px !important;
+  }
+
+  h2 {
+    font-size: 40px !important;
+  }
+
+  h3 {
+    font-size: 24px !important;
+  }
+
+  p {
+    font-size: 18px !important;
+  }
+
+  .grid, .gallery, .aktuality {
+    grid-template-columns: 1fr !important;
+  }
+
+  .container {
+    padding: 80px 24px !important;
+  }
 }
 
 </style>

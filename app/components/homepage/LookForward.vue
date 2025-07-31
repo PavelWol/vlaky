@@ -81,4 +81,10 @@ export default defineComponent({
   justify-content: space-between;
 }
 
+@media (max-width: 1024px) {
+  .cards {
+    flex-direction: column;
+  }
+}
+
 </style>

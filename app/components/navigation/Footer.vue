@@ -108,4 +108,15 @@ footer p {
   margin: 64px 0 0 0;
 }
 
+@media (max-width: 1024px) {
+  .contact-wrap {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  footer {
+    padding: unset;
+  }
+}
+
 </style>

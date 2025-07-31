@@ -65,5 +65,15 @@ import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue
   color: #AE4343;
 }
 
+@media (max-width: 1024px) {
+  .cards {
+    flex-direction: column;
+  }
+
+  .features h2 {
+    margin-bottom: 40px;
+  }
+}
+
 
 </style>

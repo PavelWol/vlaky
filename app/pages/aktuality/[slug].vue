@@ -76,4 +76,15 @@ h2 {
   max-width: 420px;
 }
 
+@media (max-width: 1024px) {
+  .post-imgs {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .post > p {
+    margin: 24px 0 40px 0;
+  }
+}
+
 </style>

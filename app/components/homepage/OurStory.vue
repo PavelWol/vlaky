@@ -17,7 +17,7 @@
           </p>
         </template>
       </SectionHeading>
-      <img src="https://placehold.co/600x400" alt="Šlapací drezína" class="story-img">
+      <img src="/images/video-img.png" alt="Šlapací drezína" class="story-img">
       <p>
         S pomocí Jirky Kotase a nadšenců z Klubu přátel kolejových vozidel z Brna a historických kousků z jeho sbírky získal
         náš park kouzlo starých časů. Díky podpoře mnoha dalších se nám daří vytvářet prostor,
@@ -59,9 +59,10 @@ import SectionHeading from "~/components/ui/SectionHeading.vue";
 }
 
 .story .story-img {
-  margin-top: 80px;
+  margin: 60px 0 36px 0;
   max-width: 100%;
   border-radius: 16px;
+  max-height: 590px;
 }
 
 </style>

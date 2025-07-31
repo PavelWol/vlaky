@@ -51,13 +51,13 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKey))
         <img
             v-if="fade"
             :src="gallery.selectedImage.src"
-            class="w-full rounded shadow-lg"
+            class=""
             :alt="gallery.selectedImage.caption"
         />
       </transition>
 
       <!-- Popis obrázku -->
-      <div class="mt-4 text-center text-sm opacity-80">
+      <div class="">
         <p>{{ gallery.selectedImage.caption }}</p>
         <p>{{ gallery.selectedIndex + 1 }} / {{ gallery.images.length }}</p>
       </div>
@@ -125,5 +125,15 @@ h2 {
   align-items: center;
   justify-content: center;
   z-index: 50;
+}
+
+@media (max-width: 1024px) {
+  .gallery img {
+    max-width: 1024px;
+  }
+
+  .fullscreen img {
+    padding: 0 24px;
+  }
 }
 </style>

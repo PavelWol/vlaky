@@ -16,6 +16,9 @@
 
 </template>
 
+<script setup lang="ts">
+</script>
+
 <style>
 
 .hero {
@@ -65,7 +68,6 @@
 }
 
 .hero-content p {
-  font-size: 24px;
   margin-top: 24px;
   margin-left: auto;
   margin-right: auto;
@@ -73,8 +75,10 @@
   color: #ffffff;
 }
 
-
+@media (max-width: 1024px) {
+  .hero {
+    padding-bottom: 80px ;
+  }
+}
 
 </style>
-<script setup lang="ts">
-</script>

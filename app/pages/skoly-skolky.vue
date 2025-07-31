@@ -99,6 +99,7 @@
         </template>
       </SectionHeading>
     </div>
+    <Form />
   </div>
 
 </template>
@@ -109,13 +110,14 @@
 
 import {defineComponent} from "vue";
 import SectionHeading from "~/components/ui/SectionHeading.vue";
+import Form from "~/components/interactive/Form.vue";
 
 export default defineComponent({
-  components: {SectionHeading}
+  components: {SectionHeading, Form}
 })
 </script>
 
-<style>
+<style scoped>
 
 .subtext {
   font-size: 24px;
