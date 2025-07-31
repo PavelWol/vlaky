@@ -89,6 +89,7 @@ footer {
 
 footer h4 {
   margin: 0;
+  color: #FFC779;
 }
 
 footer a {

@@ -40,6 +40,7 @@ p, a {
 p {
   font-size: 24px;
   line-height: 180%;
+  color: #353535;
 }
 
 h1 {
