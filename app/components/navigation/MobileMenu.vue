@@ -22,6 +22,9 @@
         >
           <span class="menu-link" :ref="setMenuLink">{{ item.label }}</span>
         </a>
+
+        <PrimaryButton @click="onButtonClick" ref="menuButton" to="/rezervace">Rezervace</PrimaryButton>
+
       </nav>
     </div>
   </div>
@@ -31,6 +34,7 @@
 import { ref, shallowRef, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import gsap from 'gsap'
+import PrimaryButton from '~/components/interactive/button/PrimaryButton.vue'
 
 const isOpen = ref(false)
 const isVisible = ref(false)
@@ -39,11 +43,20 @@ const overlay = ref(null)
 const menuContent = ref(null)
 const menuLinks = shallowRef([])
 
+const menuButton = ref(null)
+
+const onButtonClick = () => {
+  // můžeš třeba navigovat nebo otevřít modální okno
+  closeMenu()
+  setTimeout(() => {
+    router.push('/rezervace')
+  }, 900)
+}
+
 const links = [
   { to: '/', label: 'Domů' },
   { to: '/cenik', label: 'Ceník' },
   { to: '/aktuality', label: 'Aktuality' },
-  { to: '/kontakt', label: 'Kontakt' }
 ]
 
 const setMenuLink = (el) => {
@@ -107,6 +120,22 @@ watch(isOpen, async (open) => {
           ease: 'power3.out'
         }
     )
+    gsap.fromTo(
+        menuButton.value.$el,
+        {
+          y: '100%',
+          clipPath: 'inset(100% 0 0 0)',
+          opacity: 0
+        },
+        {
+          y: '0%',
+          clipPath: 'inset(0% 0 0 0)',
+          opacity: 1,
+          duration: 0.4,
+          delay: 0.3 + links.length * 0.08, // následuje po links
+          ease: 'power3.out'
+        }
+    )
   } else {
     // Odkazy stáhnout dolů
     gsap.to(menuLinks.value, {
@@ -130,12 +159,19 @@ watch(isOpen, async (open) => {
         })
       }
     })
+    gsap.to(menuButton.value.$el, {
+      y: '100%',
+      clipPath: 'inset(100% 0 0 0)',
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.in'
+    })
   }
 })
 </script>
 
 <style scoped>
-/* HAMBURGER BUTTON */
+
 .hamburger {
   position: relative;
   width: 30px;
@@ -145,6 +181,7 @@ watch(isOpen, async (open) => {
   cursor: pointer;
   z-index: 1001;
 }
+
 .hamburger span,
 .hamburger span::before,
 .hamburger span::after {
@@ -156,27 +193,32 @@ watch(isOpen, async (open) => {
   background: #000;
   transition: 0.3s ease;
 }
+
 .hamburger span {
   top: 50%;
   transform: translateY(-50%);
 }
+
 .hamburger span::before {
   top: -10px;
 }
+
 .hamburger span::after {
   top: 10px;
 }
+
 .hamburger span.open {
   background: transparent;
 }
+
 .hamburger span.open::before {
   transform: rotate(45deg) translate(5px, 5px);
 }
+
 .hamburger span.open::after {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* FULLSCREEN OVERLAY */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -188,7 +230,6 @@ watch(isOpen, async (open) => {
   overflow: hidden;
 }
 
-/* CONTENT CENTER */
 .menu-content {
   display: flex;
   flex-direction: column;
@@ -197,16 +238,15 @@ watch(isOpen, async (open) => {
   opacity: 1;
 }
 
-/* MENU LINK */
 .menu-item {
   overflow: hidden;
 }
 
 .menu-link {
   display: inline-block;
-  font-size: 2rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #111;
+  color: #353535;
   text-decoration: none;
   transform: translateY(100%);
   clip-path: inset(100% 0 0 0);
