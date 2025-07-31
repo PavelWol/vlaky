@@ -40,7 +40,7 @@ const navLinks = [
   { to: '/cenik', label: 'Ceník' },
   { to: '/atrakce', label: 'Atrakce' },
   { to: '/oslavy', label: 'Oslavy' },
- // { to: '/skoly-skolky', label: 'Školy a školky' },
+  { to: '/skoly-skolky', label: 'Školy a školky' },
 ]
 
 </script>
@@ -106,7 +106,7 @@ const navLinks = [
 .links:after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: -4px;
   left: 0;
   height: 2px;
   width: 100%;
