@@ -1,28 +1,38 @@
 <template>
-  <div class="nav-bg">
+  <div :class="['navigation', { 'transparent': isHome, 'yellow': !isHome }]" class="">
     <nav class="navbar">
       <NuxtLink to="/">
-        <img  src="https://placehold.co/600x400" alt="Logo" class="logo"> <!-- logo -->
+        <img :src="logoSrc" alt="Logo" class="logo" />
       </NuxtLink>
-      <NuxtLink
-          v-for="link in navLinks"
-          :key="link.to"
-          :to="link.to"
-          class="links"
-          :class="{
-          'active': route.path === link.to || route.path.startsWith(link.to + '/')
-        }"
-      >
-        {{ link.label }}
-      </NuxtLink>
+      <div>
+        <NuxtLink
+            v-for="link in navLinks"
+            :key="link.to"
+            :to="link.to"
+            class="links"
+            :class="{
+            'active': route.path === link.to || route.path.startsWith(link.to + '/'),
+            'white': isHome
+          }"
+        >
+          {{ link.label }}
+        </NuxtLink>
+      </div>
+      <a href="" class="btn">Rezervace</a>
     </nav>
   </div>
 </template>
 <script setup lang="js">
 
 import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 
 const route = useRoute()
+const logoSrc = computed(() =>
+    isHome.value ? '/images/logo-white.svg' : '/images/logo-black.svg'
+)
+
+const isHome = computed(() => route.path === '/')
 
 const navLinks = [
   { to: '/', label: 'Domů' },
@@ -39,7 +49,16 @@ const navLinks = [
 
 /* Navigace */
 
-.nav-bg {
+.transparent {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+.yellow {
   background-color: #FFF8ED;
 }
 
@@ -48,6 +67,7 @@ const navLinks = [
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 40px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -65,16 +85,44 @@ const navLinks = [
   transition: color 0.3s;
 }
 
+.navbar .btn {
+  margin-top: 0;
+  background-color: #E5595B;
+  color: #ffffff;
+}
+
 .logo {
   width: 118px;
 }
 
-.links:hover {
-  color: #FFC779;
+.links:not(:last-child) {
+  margin-right: 48px;
 }
 
-.active {
-  color: #FFC779 !important;
+.links {
+  position: relative;
+}
+
+.links:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #aa2e2e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.router-link-active::after,
+.links:hover::after{
+  transform: scaleX(1);
+}
+
+.white {
+  color: #ffffff !important;
 }
 
 </style>

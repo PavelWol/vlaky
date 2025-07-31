@@ -23,14 +23,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 40px;
   padding-bottom: 218px;
   color: white;
   overflow: hidden;
 }
 
 .overlay {
-  background-image: url('https://placehold.co/600x400');
+  background-image: url('/images/backgrounds/hero.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
@@ -51,7 +50,7 @@
   text-align: center;
   max-width: 900px;
   margin: auto;
-  padding-top: 140px;
+  padding-top: 260px;
 }
 
 .hero-content h1 {
@@ -71,6 +70,7 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 840px;
+  color: #ffffff;
 }
 
 
