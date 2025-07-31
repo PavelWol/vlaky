@@ -13,14 +13,14 @@
         @click.self="closeMenu"
     >
       <nav ref="menuContent" class="menu-content">
-        <NuxtLink
+        <a
             v-for="(item, i) in links"
             :key="i"
-            :to="item.to"
-            @click="closeMenu"
+            href="#"
+            @click.prevent="navigateAfterClose(item.to)"
         >
           <span :ref="setMenuLink">{{ item.label }}</span>
-        </NuxtLink>
+        </a>
       </nav>
     </div>
   </div>
@@ -29,7 +29,9 @@
 <script setup>
 import { ref, shallowRef, watch, nextTick } from 'vue'
 import gsap from 'gsap'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const overlay = ref(null)
 const menuContent = ref(null)
 const menuLinks = shallowRef([])
@@ -40,6 +42,16 @@ const isOpen = ref(false)    // ovládá animace/stav
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const navigateAfterClose = (to) => {
+  // Spusťí zavírací animaci (to je jako kliknutí)
+  isOpen.value = false
+
+  // Počkat než skončí animace (délka v ms)
+  setTimeout(() => {
+    router.push(to)
+  }, 800) // uprava animace (menu + overlay + delay)
+}
 
 const links = [
   { to: '/', label: 'Domů' },
@@ -130,7 +142,7 @@ watch(isOpen, async (newVal) => {
 </script>
 
 <style scoped>
-/* HAMBURGER */
+
 .hamburger {
   position: relative;
   width: 30px;
@@ -140,6 +152,7 @@ watch(isOpen, async (newVal) => {
   cursor: pointer;
   z-index: 1001;
 }
+
 .hamburger span,
 .hamburger span::before,
 .hamburger span::after {
@@ -151,27 +164,32 @@ watch(isOpen, async (newVal) => {
   background: #000;
   transition: 0.3s ease;
 }
+
 .hamburger span {
   top: 50%;
   transform: translateY(-50%);
 }
+
 .hamburger span::before {
   top: -10px;
 }
+
 .hamburger span::after {
   top: 10px;
 }
+
 .hamburger span.open {
   background: transparent;
 }
+
 .hamburger span.open::before {
   transform: rotate(45deg) translate(5px, 5px);
 }
+
 .hamburger span.open::after {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* OVERLAY */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -181,7 +199,6 @@ watch(isOpen, async (newVal) => {
   justify-content: flex-end;
 }
 
-/* MENU CONTENT */
 .menu-content {
   width: 250px;
   height: 100%;
@@ -191,6 +208,7 @@ watch(isOpen, async (newVal) => {
   flex-direction: column;
   gap: 1.5rem;
 }
+
 .menu-content a {
   font-size: 1.2rem;
   color: #111;
@@ -199,7 +217,6 @@ watch(isOpen, async (newVal) => {
   transform: translateY(0);
 }
 
-/* RESPONSIVE */
 @media (min-width: 1024px) {
   .mobile-menu {
     display: none;
