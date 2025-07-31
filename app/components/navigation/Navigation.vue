@@ -28,7 +28,7 @@ const navLinks = [
   { to: '/', label: 'Domů' },
   { to: '/aktuality', label: 'Aktuality' },
   { to: '/cenik', label: 'Ceník' },
- // { to: '/atrakce', label: 'Atrakce' },
+  { to: '/atrakce', label: 'Atrakce' },
  // { to: '/oslavy', label: 'Oslavy' },
  // { to: '/skoly-skolky', label: 'Školy a školky' },
 ]

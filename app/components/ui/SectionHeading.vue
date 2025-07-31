@@ -9,6 +9,9 @@
     </slot>
 
     <slot name="extra" />
+    <div v-if="showCards" class="grid">
+      <slot name="cards" />
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,10 @@ const props = defineProps({
   align: {
     type: String,
     default: 'center'
+  },
+  showCards: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -58,6 +65,10 @@ const alignClass = computed(() =>
 
 .yellow-heading h2 {
   color: #FFC779 !important;
+}
+
+img {
+  width: 100%;
 }
 
 </style>

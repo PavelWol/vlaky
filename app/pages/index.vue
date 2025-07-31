@@ -62,6 +62,14 @@ h3 {
   padding: 160px 0;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  position: relative;
+  margin-top: 72px;
+}
+
 .btn {
   display: inline-block;
   margin-top: 40px;
