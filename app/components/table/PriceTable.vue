@@ -1,6 +1,6 @@
 <template>
 
-  <section class="section">
+  <section ref="priceRef" class="section">
     <h2>Ceník platný od 1.7.2025</h2>
     <p>Nádraží Uhřice – Janův dvůr</p>
     <table class="price-table">
@@ -49,7 +49,29 @@
   </section>
 
 </template>
+
 <script setup lang="js">
+
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const priceRef = ref(null)
+
+onMounted(() => {
+  gsap.from(priceRef.value,{
+    scrollTrigger: {
+      trigger: priceRef.value,
+      start: 'top 80%',
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+  })
+})
 
 </script>
 

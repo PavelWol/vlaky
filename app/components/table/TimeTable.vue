@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section ref="timetableRef" class="section">
     <h2>Jízdní řád – projížďky vlakem každou sobotu</h2>
     <table class="schedule-table">
       <thead>
@@ -23,4 +23,26 @@
   </section>
 </template>
 <script setup lang="js">
+
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const timetableRef = ref(null)
+
+onMounted(() => {
+  gsap.from(timetableRef.value, {
+    scrollTrigger: {
+      trigger: timetableRef.value,
+      start: 'top 80%',
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.out'
+  })
+})
+
 </script>

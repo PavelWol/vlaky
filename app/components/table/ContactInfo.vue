@@ -1,6 +1,6 @@
 <template>
 
-  <section class="section">
+  <section ref="contactRef" class="section">
     <h2>Šlapací drezína</h2>
     <p>
       Šlapací drezína pro 6 osob (cca 6 km po trati).<br>
@@ -19,4 +19,26 @@
 
 </template>
 <script setup lang="js">
+
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const contactRef = ref(null)
+
+onMounted(() => {
+  gsap.from(contactRef.value, {
+    scrollTrigger: {
+      trigger: contactRef.value,
+      start: 'top 80%',
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.out'
+  })
+})
+
 </script>
