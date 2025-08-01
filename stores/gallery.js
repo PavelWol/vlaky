@@ -1,34 +1,42 @@
+import { defineStore } from 'pinia'
+
 export const useGalleryStore = defineStore('gallery', {
     state: () => ({
-        selectedIndex: null,
         images: [
-            { src: '/images/gallery/1.png', caption: 'První obrázek' },
-            { src: '/images/gallery/2.png', caption: 'Druhý obrázek' },
-            { src: '/images/gallery/3.png', caption: 'Třetí obrázek' },
-            { src: '/images/gallery/4.png', caption: 'Čtvrtý obrázek' },
-            { src: '/images/gallery/1.png', caption: 'Pátý obrázek' },
-            { src: '/images/gallery/2.png', caption: 'Šestý obrázek' },
-        ]
+            { src: '/images/gallery/1.png', alt: 'Historická lokomotiva' },
+            { src: '/images/gallery/1.png', alt: 'Pohled ze stanoviště' },
+            { src: '/images/gallery/1.png', alt: 'Nádraží při západu slunce' },
+            { src: '/images/gallery/1.png', alt: 'Děti nastupují do vlaku' },
+            { src: '/images/gallery/1.png', alt: 'Detail kola lokomotivy' },
+            { src: '/images/gallery/1.png', alt: 'Vlak projíždí krajinou' }
+        ],
+        currentZoomIndex: null
     }),
+
     getters: {
-        selectedImage: (state) =>
-            state.selectedIndex !== null ? state.images[state.selectedIndex] : null
+        currentImage(state) {
+            return state.images[state.currentZoomIndex]
+        }
     },
+
     actions: {
-        open(index) {
-            this.selectedIndex = index
+        openZoom(index) {
+            this.currentZoomIndex = index
+            document.body.style.overflow = 'hidden'
         },
-        close() {
-            this.selectedIndex = null
+        closeZoom() {
+            this.currentZoomIndex = null
+            document.body.style.overflow = ''
         },
-        next() {
-            if (this.selectedIndex === null) return
-            this.selectedIndex = (this.selectedIndex + 1) % this.images.length
+        nextImage() {
+            if (this.currentZoomIndex < this.images.length - 1) {
+                this.currentZoomIndex++
+            }
         },
-        prev() {
-            if (this.selectedIndex === null) return
-            this.selectedIndex =
-                (this.selectedIndex - 1 + this.images.length) % this.images.length
+        prevImage() {
+            if (this.currentZoomIndex > 0) {
+                this.currentZoomIndex--
+            }
         }
     }
 })
