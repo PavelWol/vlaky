@@ -1,6 +1,6 @@
 <template>
 
-  <header class="hero">
+  <section class="hero">
     <div class="overlay"></div>
 
     <div class="hero-content">
@@ -12,7 +12,7 @@
       </p>
       <a href="#onas" class="btn">Více informací</a>
     </div>
-  </header>
+  </section>
 
 </template>
 
