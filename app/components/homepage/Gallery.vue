@@ -1,40 +1,43 @@
 <template>
-  <div class="gallery">
-    <div
-        v-for="(img, i) in images"
-        :key="i"
-        class="gallery-item"
-        @click="e => handleOpen(i, e)"
-        :ref="el => thumbnailRefs[i] = el"
-    >
-      <img :src="img.src" :alt="img.alt" loading="lazy" />
-    </div>
-
-    <div
-        v-if="zoomIndex !== null"
-        class="overlay"
-        ref="overlayRef"
-        @click.self="handleClose"
-        @touchstart="onTouchStart"
-        @touchmove="onTouchMove"
-        @touchend="onTouchEnd"
-    >
-      <img
-          ref="zoomImage"
-          :src="currentImg.src"
-          :alt="currentImg.alt"
-          class="zoomed"
-          @click.stop
-          @load="animateZoomIn"
-      />
-      <div class="caption">
-        <p>{{ currentImg.alt }}</p>
-        <span>{{ zoomIndex + 1 }} / {{ images.length }}</span>
+  <div class="container">
+    <h2>Jak to u nás vypadá?</h2>
+    <div class="gallery">
+      <div
+          v-for="(img, i) in images"
+          :key="i"
+          class="gallery-item"
+          @click="e => handleOpen(i, e)"
+          :ref="el => thumbnailRefs[i] = el"
+      >
+        <img :src="img.src" :alt="img.alt" loading="lazy" />
       </div>
 
-      <button class="nav left" @click.stop="prev" v-if="zoomIndex > 0">‹</button>
-      <button class="nav right" @click.stop="next" v-if="zoomIndex < images.length - 1">›</button>
-      <button class="close-btn" @click="handleClose">×</button>
+      <div
+          v-if="zoomIndex !== null"
+          class="overlay"
+          ref="overlayRef"
+          @click.self="handleClose"
+          @touchstart="onTouchStart"
+          @touchmove="onTouchMove"
+          @touchend="onTouchEnd"
+      >
+        <img
+            ref="zoomImage"
+            :src="currentImg.src"
+            :alt="currentImg.alt"
+            class="zoomed"
+            @click.stop
+            @load="animateZoomIn"
+        />
+        <div class="caption">
+          <p>{{ currentImg.alt }}</p>
+          <span>{{ zoomIndex + 1 }} / {{ images.length }}</span>
+        </div>
+
+        <button class="nav left" @click.stop="prev" v-if="zoomIndex > 0">‹</button>
+        <button class="nav right" @click.stop="next" v-if="zoomIndex < images.length - 1">›</button>
+        <button class="close-btn" @click="handleClose">×</button>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +62,7 @@ const clickY = ref(0)
 const startX = ref(0)
 const endX = ref(0)
 const direction = ref('left')
+const isTransitioning = ref(false)
 
 const onTouchStart = (e) => {
   startX.value = e.touches[0].clientX
@@ -148,16 +152,24 @@ const handleClose = () => {
 }
 
 const next = async () => {
-  if (zoomIndex.value < images.value.length - 1) {
+  if (zoomIndex.value < images.value.length - 1 && !isTransitioning.value) {
+    isTransitioning.value = true
     direction.value = 'left'
     await transitionTo(zoomIndex.value + 1)
+    setTimeout(() => {
+      isTransitioning.value = false
+    }, 500)
   }
 }
 
 const prev = async () => {
-  if (zoomIndex.value > 0) {
+  if (zoomIndex.value > 0 && !isTransitioning.value) {
+    isTransitioning.value = true
     direction.value = 'right'
     await transitionTo(zoomIndex.value - 1)
+    setTimeout(() => {
+      isTransitioning.value = false
+    }, 500)
   }
 }
 
@@ -190,10 +202,18 @@ const transitionTo = async (newIndex) => {
 </script>
 
 <style scoped>
+
+h2 {
+  text-align: center;
+  color: #AE4343;
+}
+
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  position: relative;
+  margin-top: 72px;
 }
 .gallery-item {
   cursor: zoom-in;
@@ -270,5 +290,15 @@ const transitionTo = async (newIndex) => {
   border: none;
   color: white;
   cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .gallery img {
+    max-width: 1024px;
+  }
+
+  .fullscreen img {
+    padding: 0 24px;
+  }
 }
 </style>
