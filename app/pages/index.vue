@@ -16,21 +16,21 @@ import LookForward from '~/components/homepage/LookForward.vue'
 import EventsNews from "~/components/homepage/EventsNews.vue";
 import Gallery from "~/components/homepage/Gallery.vue";
 
-import gsap from "gsap";
-import {onMounted} from "vue";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray('section').forEach((section, i) => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      pin: true,
-      pinSpacing: false
-    });
-  });
-})
+// import gsap from "gsap";
+// import {onMounted} from "vue";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+//
+// onMounted(() => {
+//   gsap.registerPlugin(ScrollTrigger);
+//   gsap.utils.toArray('section').forEach((section, i) => {
+//     ScrollTrigger.create({
+//       trigger: section,
+//       start: "top top",
+//       pin: true,
+//       pinSpacing: false
+//     });
+//   });
+// })
 
 </script>
 
@@ -107,11 +107,13 @@ h3 {
   border-color: #FFC779;
 }
 
+/*
 section {
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
+ */
 
 @media (max-width: 1024px) {
   h1 {
