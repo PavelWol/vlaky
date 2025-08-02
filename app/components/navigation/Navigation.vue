@@ -1,8 +1,8 @@
 <template>
-  <div :class="['navigation', { 'transparent': isHome, 'yellow': !isHome }]" class="">
+  <div ref="navRef" :class="['navigation', { 'transparent': isHome, 'yellow': !isHome }]" class="">
     <nav class="navbar">
       <NuxtLink to="/">
-        <img :src="logoSrc" alt="Logo" class="logo" />
+        <img ref="logoRef" :src="logoSrc" alt="Logo" class="logo" />
       </NuxtLink>
       <div class="desktop-nav">
         <NuxtLink
@@ -29,6 +29,10 @@ import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 import MobileMenu from '~/components/navigation/MobileMenu.vue'
 
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
 const route = useRoute()
 const logoSrc = computed(() =>
     isHome.value ? '/images/logo-white.svg' : '/images/logo-black.svg'
@@ -44,6 +48,39 @@ const navLinks = [
   { to: '/oslavy', label: 'Oslavy' },
   { to: '/skoly-skolky', label: 'Školy a školky' },
 ]
+
+gsap.registerPlugin(ScrollTrigger)
+
+const navRef = ref(null)
+const logoRef = ref(null)
+
+
+onMounted(() => {
+  gsap.from(navRef.value, {
+    scrollTrigger: {
+      trigger: navRef.value,
+      start: 'top 80%',
+    },
+    y: -250,
+    opacity: 0,
+    duration: 0.8,
+    delay: 4,
+    ease: 'power2.out'
+  })
+
+  gsap.from(logoRef.value, {
+    scrollTrigger: {
+      trigger: logoRef.value,
+      start: 'top 80%',
+    },
+    rotate: 360,
+    scale: 2,
+    duration: 1.5,
+    delay: 4.1,
+    ease: 'power2.out'
+  })
+
+})
 
 </script>
 
