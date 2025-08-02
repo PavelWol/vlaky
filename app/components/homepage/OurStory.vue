@@ -17,7 +17,22 @@
           </p>
         </template>
       </SectionHeading>
-      <img src="/images/video-img.png" alt="Šlapací drezína" class="story-img">
+
+      <!-- Video -->
+
+      <div class="video-container">
+        <video
+            width="1300"
+            height="590"
+            muted
+            autoplay
+            loop
+            :src="videoSrc"
+            :alt="videoAlt"
+            class="media-video"
+        />
+      </div>
+
       <p>
         S pomocí Jirky Kotase a nadšenců z Klubu přátel kolejových vozidel z Brna a historických kousků z jeho sbírky získal
         náš park kouzlo starých časů. Díky podpoře mnoha dalších se nám daří vytvářet prostor,
@@ -36,6 +51,10 @@
 <script setup lang="js">
 
 import SectionHeading from "~/components/ui/SectionHeading.vue";
+import {ref} from "vue";
+
+const videoSrc = ref('/video/train.mp4')
+const videoAlt = ref('vlak')
 
 </script>
 
@@ -58,11 +77,12 @@ import SectionHeading from "~/components/ui/SectionHeading.vue";
   margin-top: 24px
 }
 
-.story .story-img {
+.story .media-video {
   margin: 60px 0 36px 0;
   max-width: 100%;
   border-radius: 16px;
   max-height: 590px;
+  object-fit: cover;
 }
 
 </style>
