@@ -25,6 +25,7 @@ import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { useState } from '#app'
 
 gsap.registerPlugin(SplitText)
 gsap.registerPlugin(ScrollTrigger)
@@ -32,7 +33,11 @@ gsap.registerPlugin(ScrollTrigger)
 const wrapper = ref(null)
 const btnRef = ref(null)
 
+const heroAnimated = useState('heroAnimated', () => false)
+
 onMounted(() => {
+  if (heroAnimated.value) return // animace už byla, přeskoč
+
   const split = new SplitText('.hero-heading', {
     type: 'chars,words',
     charsClass: 'char'
@@ -56,6 +61,7 @@ onMounted(() => {
     delay: 2.5,
     ease: 'power2.out'
   })
+
   gsap.from(btnRef.value, {
     scrollTrigger: {
       trigger: btnRef.value,
@@ -67,6 +73,7 @@ onMounted(() => {
     delay: 2.7,
     ease: 'power2.out'
   })
+
   gsap.fromTo('.overlay',
       { scale: 1 }, // začíná mírně přiblížené
       {
@@ -80,6 +87,8 @@ onMounted(() => {
         }
       }
   )
+
+  heroAnimated.value = true // zaznamenáme, že proběhla
 })
 
 
