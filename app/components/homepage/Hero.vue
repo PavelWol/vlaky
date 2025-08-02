@@ -12,7 +12,7 @@
           Naskočte do vlaku a hurá na cestu za zážitky, které budou bavit děti i dospělé!
         </p>
       </div>
-      <a ref="btnRef" href="#onas" class="btn">Více informací</a>
+      <a ref="btnRef" href="#onas" class="btn btn-anim">Více informací</a>
     </div>
   </section>
 
@@ -43,23 +43,34 @@ onMounted(() => {
     charsClass: 'char'
   })
 
+  const splitText = new SplitText('.hero-paragraph', {
+    type: 'chars,words',
+    charsClass: 'char'
+  })
+
   gsap.from(split.chars, {
     opacity: 0,
     y: -40,
     duration: 0.2,
+    rotation: "random(-80, 80)",
     ease: 'power2.out',
     stagger: {
       each: 0.1,
-      from: 'random',
     }
   })
 
-  gsap.from('.hero-paragraph', {
+  gsap.from(splitText.chars, {
     opacity: 0,
     y: 50,
-    duration: 0.6,
+    transformOrigin: '50% 50% -160px',
+    duration: true,
     delay: 2.5,
-    ease: 'power2.out'
+    ease: 'power3',
+    stagger: {
+      each: 0.1,
+      from: 'end',
+      amount: 1,
+    }
   })
 
   gsap.from(btnRef.value, {
@@ -70,8 +81,9 @@ onMounted(() => {
     x: -50,
     opacity: 0,
     duration: 0.8,
-    delay: 2.7,
-    ease: 'power2.out'
+    delay: 4,
+    ease: 'power2.out',
+    rotation: 90,
   })
 
   gsap.fromTo('.overlay',

@@ -100,11 +100,11 @@ h3 {
   border-radius: 32px;
   text-decoration: none;
   font-weight: 700;
-  transition: all 0.3s ease;
 }
 
 .btn:hover {
   border-color: #FFC779;
+  transition: 0.3s ease;
 }
 
 /*
