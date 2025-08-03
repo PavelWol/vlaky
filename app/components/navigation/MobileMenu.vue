@@ -254,6 +254,12 @@ watch(isOpen, async (open) => {
   clip-path: inset(100% 0 0 0);
 }
 
+.primary-button {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(100%);
+  opacity: 0;
+}
+
 /* DESKTOP SKRYJ */
 @media (min-width: 1024px) {
   .mobile-menu {

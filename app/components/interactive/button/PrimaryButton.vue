@@ -5,7 +5,7 @@
       class="primary-button"
       @click="onClick"
   >
-    <slot>Rezervovat</slot>
+    <slot />
   </component>
 </template>
 
@@ -27,12 +27,6 @@ defineProps({
   border-radius: 32px;
   text-decoration: none;
   font-family: "Readex Pro", sans-serif;
-}
-
-.primary-button {
-  clip-path: inset(100% 0 0 0);
-  transform: translateY(100%);
-  opacity: 0;
 }
 
 </style>

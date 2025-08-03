@@ -1,6 +1,6 @@
 <template>
 
-  <section id="onas" class="features">
+  <section class="features">
     <div class="container pSection">
       <h2>Akce a aktuality</h2>
 
@@ -22,7 +22,9 @@
         />
 
       </div>
-      <SecondaryButton></SecondaryButton>
+
+
+      <PrimaryButton @click="onButtonClick">ctete vice</PrimaryButton>
     </div>
   </section>
 
@@ -30,7 +32,17 @@
 <script setup lang="ts">
 
 import LookForwardItem from "~/components/interactive/LookForwardItem.vue";
-import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
+import PrimaryButton from "~/components/interactive/button/PrimaryButton.vue";
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const onButtonClick = () => {
+  // můžeš třeba navigovat nebo otevřít modální okno
+  setTimeout(() => {
+    router.push('/aktuality')
+  }, 0)
+}
 
 </script>
 
