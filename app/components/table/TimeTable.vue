@@ -38,10 +38,10 @@ onMounted(() => {
       trigger: timetableRef.value,
       start: 'top 80%',
     },
-    x: -50,
-    opacity: 0,
+    x: -20,
+    opacity: 0.5,
     duration: 0.8,
-    ease: 'power2.out'
+    ease: 'power2.Out'
   })
 })
 

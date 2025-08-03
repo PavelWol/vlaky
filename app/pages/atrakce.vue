@@ -1,5 +1,5 @@
 <template>
-  <div class="atrakce">
+  <div ref="atrakceRef" class="atrakce">
     <div class="container">
       <SectionHeading
           color="red"
@@ -177,6 +177,27 @@ const cardData = [
     heading: 'Cyklostezska',
   },
 ]
+
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const atrakceRef = ref(null)
+
+onMounted(() => {
+  gsap.from(atrakceRef.value, {
+    scrollTrigger: {
+      trigger: atrakceRef.value,
+      start: 'top 80%',
+    },
+    x: -20,
+    opacity: 0.5,
+    duration: 0.8,
+    ease: 'power2.Out'
+  })
+})
 
 </script>
 

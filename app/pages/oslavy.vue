@@ -1,6 +1,6 @@
 <template>
 
-  <div class="oslavy">
+  <div ref="oslavyRef" class="oslavy">
     <div class="container">
       <SectionHeading
           color="red"
@@ -44,17 +44,32 @@
 
 </template>
 
-<script>
+<script setup lang="js">
 
-
-
-import {defineComponent} from "vue";
 import SectionHeading from "~/components/ui/SectionHeading.vue";
 import Form from "~/components/interactive/Form.vue";
 
-export default defineComponent({
-  components: {Form, SectionHeading}
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const oslavyRef = ref(null)
+
+onMounted(() => {
+  gsap.from(oslavyRef.value, {
+    scrollTrigger: {
+      trigger: oslavyRef.value,
+      start: 'top 80%',
+    },
+    x: -20,
+    opacity: 0.5,
+    duration: 0.8,
+    ease: 'power2.Out'
+  })
 })
+
 </script>
 
 <style scoped>

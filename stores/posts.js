@@ -63,6 +63,54 @@ export const usePostStore = defineStore('posts', {
                 image: '/images/gallery/3.png',
                 content: 'Obsah třetího článku...'
             },
+            {
+                id: 4,
+                slug: 'ctvrty-clanek',
+                title: 'Čtvrtý článek',
+                date: '6. března 2025, Gabriela Slezáčková',
+                image: '/images/gallery/3.png',
+                content: 'Obsah třetího článku...'
+            },
+            {
+                id: 5,
+                slug: 'paty-clanek',
+                title: 'Pátý článek',
+                date: '6. března 2025, Gabriela Slezáčková',
+                image: '/images/gallery/3.png',
+                content: 'Obsah třetího článku...'
+            },
+            {
+                id: 6,
+                slug: 'sesty-clanek',
+                title: 'Šestý článek',
+                date: '6. března 2025, Gabriela Slezáčková',
+                image: '/images/gallery/3.png',
+                content: 'Obsah třetího článku...'
+            },
+            {
+                id: 7,
+                slug: 'sedmy-clanek',
+                title: 'Sedmý článek',
+                date: '6. března 2025, Gabriela Slezáčková',
+                image: '/images/gallery/3.png',
+                content: 'Obsah třetího článku...'
+            },
+            {
+                id: 8,
+                slug: 'osmy-clanek',
+                title: 'Osmý článek',
+                date: '6. března 2025, Gabriela Slezáčková',
+                image: '/images/gallery/3.png',
+                content: 'Obsah třetího článku...'
+            },
+            {
+                id: 9,
+                slug: 'devaty-clanek',
+                title: 'Devátý článek',
+                date: '6. března 2025, Gabriela Slezáčková',
+                image: '/images/gallery/3.png',
+                content: 'Obsah třetího článku...'
+            },
         ]
     }),
     getters: {

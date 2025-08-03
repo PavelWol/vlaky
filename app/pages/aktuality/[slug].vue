@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div ref="clanekRef" class="container">
     <div class="post">
       <h2 class="">{{ post.title }}</h2>
       <p>{{ post.date }}</p>
@@ -28,6 +28,28 @@
   if (!post) {
     throw createError({ statusCode: 404, message: 'Článek nebyl nalezen.' })
   }
+
+  import { ref, onMounted } from 'vue'
+  import gsap from 'gsap'
+  import ScrollTrigger from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const clanekRef = ref(null)
+
+  onMounted(() => {
+    gsap.from(clanekRef.value, {
+      scrollTrigger: {
+        trigger: clanekRef.value,
+        start: 'top 80%',
+      },
+      x: -20,
+      opacity: 0.5,
+      duration: 0.8,
+      ease: 'power2.Out'
+    })
+  })
+
 </script>
 
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div ref="aktualityRef" class="container">
     <h2>Akce a aktuality</h2>
     <div class="aktuality">
       <NuxtLink
@@ -21,6 +21,28 @@
 <script setup>
   import { usePostStore } from '~~/stores/posts'
   const posts = usePostStore()
+
+  import { ref, onMounted } from 'vue'
+  import gsap from 'gsap'
+  import ScrollTrigger from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const aktualityRef = ref(null)
+
+  onMounted(() => {
+    gsap.from(aktualityRef.value, {
+      scrollTrigger: {
+        trigger: aktualityRef.value,
+        start: 'top 80%',
+      },
+      x: -20,
+      opacity: 0.5,
+      duration: 0.8,
+      ease: 'power2.Out'
+    })
+  })
+
 </script>
 
 <style scoped>
