@@ -54,32 +54,20 @@ gsap.registerPlugin(ScrollTrigger)
 const navRef = ref(null)
 const logoRef = ref(null)
 
-
 onMounted(() => {
-  gsap.from(navRef.value, {
-    scrollTrigger: {
-      trigger: navRef.value,
-      start: 'top 80%',
-    },
-    y: -250,
-    opacity: 0,
-    duration: 0.8,
-    delay: 4,
-    ease: 'power2.out'
-  })
-
-  gsap.from(logoRef.value, {
-    scrollTrigger: {
-      trigger: logoRef.value,
-      start: 'top 80%',
-    },
-    rotate: 360,
-    scale: 2,
-    duration: 1.5,
-    delay: 4.1,
-    ease: 'power2.out'
-  })
-
+  // Pokud je cesta specifická (např. /home), animace se spustí
+  if (route.path === '/') {
+    gsap.from(navRef.value, {
+      scrollTrigger: {
+        trigger: navRef.value,
+        start: 'top 80%',
+      },
+      opacity: 0,
+      duration: 0.8,
+      delay: 4,
+      ease: 'power2.out',
+    })
+  }
 })
 
 </script>
