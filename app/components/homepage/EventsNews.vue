@@ -1,23 +1,23 @@
 <template>
 
   <section id="onas" class="features">
-    <div class="container">
+    <div class="container pSection">
       <h2>Akce a aktuality</h2>
 
       <div class="cards">
 
         <LookForwardItem
-          image="https://placehold.co/600x400"
+          image="/images/gallery/2.png"
           heading="Historický motorák"
         />
 
         <LookForwardItem
-          image="https://placehold.co/600x400"
+          image="/images/gallery/2.png"
           heading="Zábavní park"
         />
 
         <LookForwardItem
-          image="https://placehold.co/600x400"
+          image="/images/gallery/2.png"
           heading="Šlapací drezína"
         />
 
@@ -28,8 +28,10 @@
 
 </template>
 <script setup lang="ts">
+
 import LookForwardItem from "~/components/interactive/LookForwardItem.vue";
 import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
+
 </script>
 
 <style scoped>

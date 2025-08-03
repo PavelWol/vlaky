@@ -1,7 +1,7 @@
 <template>
 
   <section id="onas" class="features">
-    <div class="container">
+    <div class="container pSection">
       <h2>Na co se u nás můžete těšit?</h2>
       <p class="intro">
         Připravili jsme pro vás nevšední zážitky, které si zamiluje celá rodina.<br>
@@ -11,19 +11,19 @@
       <div class="cards">
 
         <LookForwardItem
-          image="https://placehold.co/600x400"
+          image="/images/gallery/1.png"
           heading="Historický motorák"
           text="Naskočte do vláčku, který pamatuje staré časy! Podívejte se do kabiny strojvedoucího a splňte si dětský sen alespoň na chvíli."
         />
 
         <LookForwardItem
-            image="https://placehold.co/600x400"
+            image="/images/gallery/2.png"
             heading="Zábavní park"
             text="Skákací hrad, herní vagón, kolotoč i pískový svět - u nás si děti pořádně vyhrají a rodiče si odpočinou ve stínu lesíka."
         />
 
         <LookForwardItem
-            image="https://placehold.co/600x400"
+            image="/images/gallery/3.png"
             heading="Šlapací drezína"
             text="Nasedněte, šlápněte a hurá na výlet! Naše šlapací drezína je ideální pro rodinnou zábavu s kapkou pohybu."
         />
@@ -47,6 +47,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.pContent {
+  position: relative;
+  overflow: hidden;
+}
 
 .features {
   background-color: #AE4343;
