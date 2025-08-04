@@ -1,6 +1,5 @@
 <template>
-
-  <section id="onas" class="features">
+  <section id="tesit-se" class="features">
     <div class="container pSection">
       <h2>Na co se u nás můžete těšit?</h2>
       <p class="intro">

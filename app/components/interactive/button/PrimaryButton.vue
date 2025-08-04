@@ -1,7 +1,7 @@
 <template>
   <component
-      :is="to ? 'NuxtLink' : 'button'"
-      :to="to"
+      :is="href ? 'a' : 'button'"
+      :href="href"
       class="primary-button"
       @click="onClick"
   >
@@ -11,7 +11,7 @@
 
 <script setup>
 defineProps({
-  to: String, // pokud chci přesměrovat (NuxtLink)
+  href: String, // pokud chci přesměrovat (NuxtLink)
   onClick: Function // pokud chci kliknutí
 })
 </script>
@@ -27,6 +27,14 @@ defineProps({
   border-radius: 32px;
   text-decoration: none;
   font-family: "Readex Pro", sans-serif;
+  transition: 0.3s;
+}
+
+.primary-button:hover {
+  background-color: #a64244;
+  transition: 0.3s;
+  border: 2px solid #a64244;
+  transform: scale(1.05);
 }
 
 </style>

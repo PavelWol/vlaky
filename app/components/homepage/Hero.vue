@@ -12,7 +12,14 @@
           Naskočte do vlaku a hurá na cestu za zážitky, které budou bavit děti i dospělé!
         </p>
       </div>
-      <a ref="btnRef" href="#onas" class="btn btn-anim">Více informací</a>
+      <div class="btn-wrapper" >
+        <div ref="btnRef1">
+          <PrimaryButton href="rezervace">Rezervace</PrimaryButton>
+        </div>
+        <div ref="btnRef2">
+          <SecondaryButton href="#tesit-se">Více informací</SecondaryButton>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -26,12 +33,15 @@ import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useState } from '#app'
+import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
+import PrimaryButton from "~/components/interactive/button/PrimaryButton.vue";
 
 gsap.registerPlugin(SplitText)
 gsap.registerPlugin(ScrollTrigger)
 
 const wrapper = ref(null)
-const btnRef = ref(null)
+const btnRef1 = ref(null)
+const btnRef2 = ref(null)
 
 const heroAnimated = useState('heroAnimated', () => false)
 
@@ -48,6 +58,7 @@ onMounted(() => {
     charsClass: 'char'
   })
 
+  const isMobile = window.innerWidth < 768
   gsap.from(split.chars, {
     opacity: 0,
     y: -40,
@@ -73,17 +84,25 @@ onMounted(() => {
     }
   })
 
-  gsap.from(btnRef.value, {
+  gsap.from(btnRef1.value, {
     scrollTrigger: {
-      trigger: btnRef.value,
+      trigger: btnRef1.value,
       start: 'top 80%',
     },
-    x: -50,
-    opacity: 0,
-    duration: 0.8,
-    delay: 4,
-    ease: 'power2.out',
-    rotation: 90,
+    ...(isMobile
+        ? { y: 30, opacity: 0, duration: 0.6, ease: 'back.out(1.7)' } // MOBILE animace
+        : { x: -50, opacity: 0, duration: 0.8, delay: 4, ease: 'power2.out' }) // DESKTOP animace
+  })
+
+  // 🔽 Animace pro btnRef2 – odlišná pro mobil
+  gsap.from(btnRef2.value, {
+    scrollTrigger: {
+      trigger: btnRef2.value,
+      start: 'top 80%',
+    },
+    ...(isMobile
+        ? { y: 30, opacity: 0, duration: 0.6, ease: 'back.out(1.7)' } // MOBILE animace
+        : { x: 50, opacity: 0, duration: 0.8, delay: 4, ease: 'power2.out' }) // DESKTOP animace
   })
 
   gsap.fromTo('.overlay',
@@ -154,7 +173,7 @@ onMounted(() => {
 }
 
 .hero-content .highlight {
-  color: #FFC779; /* oranžový text */
+  color: #FFC779;
 }
 
 .hero-content p {
@@ -165,6 +184,15 @@ onMounted(() => {
   color: #ffffff;
 }
 
+.btn-wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+.btn-wrapper a:first-child {
+  margin-right: 8px;
+}
+
 .char {
   display: inline-block;
   will-change: transform, opacity;
@@ -173,6 +201,24 @@ onMounted(() => {
 @media (max-width: 1024px) {
   .hero {
     padding-bottom: 80px ;
+    height: unset;
+  }
+
+  .btn-wrapper {
+    flex-direction: column;
+  }
+
+  .btn-wrapper a:first-child {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .hero-content {
+    padding-top: 160px;
+  }
+
+  .hero-paragraph {
+    padding: 0 24px;
   }
 }
 

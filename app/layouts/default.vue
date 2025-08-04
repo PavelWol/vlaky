@@ -17,6 +17,10 @@ import Navigation from '~/components/navigation/Navigation.vue'
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
 }
@@ -65,18 +69,6 @@ h3 {
   grid-gap: 20px;
   position: relative;
   margin-top: 72px;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 20px 48px;
-  background-color: transparent;
-  color: white;
-  border: 2px solid #E5595B;
-  border-radius: 32px;
-  text-decoration: none;
-  font-weight: 700;
 }
 
 .btn:hover {

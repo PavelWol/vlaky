@@ -18,7 +18,7 @@
           {{ link.label }}
         </NuxtLink>
       </div>
-      <a href="" class="btn">Rezervace</a>
+      <PrimaryButton class="mobile-btn" href="/rezervace">Rezervace</PrimaryButton>
       <MobileMenu />
     </nav>
   </div>
@@ -32,6 +32,7 @@ import MobileMenu from '~/components/navigation/MobileMenu.vue'
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import PrimaryButton from "~/components/interactive/button/PrimaryButton.vue";
 
 const route = useRoute()
 const logoSrc = computed(() =>
@@ -156,6 +157,14 @@ onMounted(() => {
 
   .desktop-nav {
     display: none;
+  }
+
+  .logo {
+    width: 64px;
+  }
+
+  .mobile-btn {
+    display: none !important;
   }
 
 }

@@ -55,8 +55,11 @@ const onButtonClick = () => {
 
 const links = [
   { to: '/', label: 'Domů' },
-  { to: '/cenik', label: 'Ceník' },
   { to: '/aktuality', label: 'Aktuality' },
+  { to: '/cenik', label: 'Ceník' },
+  { to: '/atrakce', label: 'Atrakce' },
+  { to: '/oslavy', label: 'Oslavy' },
+  { to: '/skoly-skolky', label: 'Školy a školky' },
 ]
 
 const setMenuLink = (el) => {
@@ -85,7 +88,7 @@ const navigateAfterClose = (to) => {
   isOpen.value = false
   setTimeout(() => {
     router.push(to)
-  }, 900) // musí odpovídat době animace zavření
+  }, 800) // musí odpovídat době animace zavření
 }
 
 watch(isOpen, async (open) => {
@@ -217,6 +220,7 @@ watch(isOpen, async (open) => {
 
 .hamburger span.open::after {
   transform: rotate(-45deg) translate(5px, -5px);
+  top: 5px;
 }
 
 .menu-overlay {
@@ -230,6 +234,7 @@ watch(isOpen, async (open) => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  height: 100vh;
 }
 
 .menu-content {
