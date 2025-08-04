@@ -15,7 +15,7 @@
 
         <textarea placeholder="Vaše zpráva" name="textarea" rows="4" v-model="form.message"></textarea>
 
-        <button type="submit">Odeslat formulář</button>
+        <SecondaryButton class="btn" href="/rezervace">Odeslat formulář</SecondaryButton>
       </form>
     </section>
   </div>
@@ -23,6 +23,7 @@
 
 <script setup>
 import { reactive } from 'vue'
+import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
 
 const form = reactive({
   name: '',
@@ -86,22 +87,9 @@ const handleSubmit = () => {
   flex: 1;
 }
 
-button[type='submit'] {
-  background-color: transparent;
-  color: white;
-  border: 2px solid #aa2e2e;
-  padding: 20px 48px;
-  border-radius: 50px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.btn {
   max-width: 230px;
   margin: 40px auto 0 auto;
-  font-family: "Readex Pro", sans-serif;
-}
-
-button[type='submit']:hover {
-  background-color: #aa2e2e;
 }
 
 @media (max-width: 640px) {

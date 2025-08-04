@@ -24,7 +24,7 @@
       </div>
 
 
-      <PrimaryButton @click="onButtonClick">ctete vice</PrimaryButton>
+      <SecondaryButton class="btn" href="/aktuality">Čtěte více</SecondaryButton>
     </div>
   </section>
 
@@ -34,6 +34,7 @@
 import LookForwardItem from "~/components/interactive/LookForwardItem.vue";
 import PrimaryButton from "~/components/interactive/button/PrimaryButton.vue";
 import { useRouter } from 'vue-router'
+import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
 
 const router = useRouter()
 
@@ -77,6 +78,12 @@ const onButtonClick = () => {
 
 .card :deep(h3) {
   color: #AE4343;
+}
+
+.btn {
+  margin-top: 40px;
+  color: #353535;
+  font-weight: bold;
 }
 
 @media (max-width: 1024px) {

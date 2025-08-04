@@ -28,6 +28,7 @@
         />
 
       </div>
+      <SecondaryButton class="btn" href="/atrakce">Prohlédnout atrakce</SecondaryButton>
     </div>
   </section>
 
@@ -37,9 +38,10 @@
 
 import LookForwardItem from '~/components/interactive/LookForwardItem.vue'
 import {defineComponent} from "vue";
+import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
 
 export default defineComponent({
-  components: {LookForwardItem}
+  components: {SecondaryButton, LookForwardItem}
 })
 
 
@@ -83,6 +85,10 @@ export default defineComponent({
 .cards {
   display: flex;
   justify-content: space-between;
+}
+
+.btn {
+  margin-top: 40px;
 }
 
 @media (max-width: 1024px) {
