@@ -17,9 +17,6 @@
           class="overlay"
           ref="overlayRef"
           @click.self="handleClose"
-          @touchstart="onTouchStart"
-          @touchmove="onTouchMove"
-          @touchend="onTouchEnd"
       >
         <img
             ref="zoomImage"
@@ -27,7 +24,6 @@
             :alt="currentImg.alt"
             class="zoomed"
             @click.stop
-            @load="animateZoomIn"
         />
         <div class="caption">
           <p>{{ currentImg.alt }}</p>
@@ -45,91 +41,38 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue'
 import gsap from 'gsap'
-import { useGalleryStore } from '~~/stores/gallery'
 
-const gallery = useGalleryStore()
-const images = computed(() => gallery.images)
-const zoomIndex = computed(() => gallery.currentZoomIndex)
-const currentImg = computed(() => gallery.currentImage)
+const images = ref([
+  { src: '/images/gallery/1.png', alt: 'Obrázek 1' },
+  { src: '/images/gallery/2.png', alt: 'Obrázek 2' },
+  { src: '/images/gallery/3.png', alt: 'Obrázek 3' },
+  { src: '/images/gallery/4.png', alt: 'Obrázek 4' },
+  { src: '/images/gallery/1.png', alt: 'Obrázek 5' },
+  { src: '/images/gallery/2.png', alt: 'Obrázek 6' }
+])
 
+const zoomIndex = ref(null)
+const currentImg = computed(() => images.value[zoomIndex.value] || {})
+
+const thumbnailRefs = ref([])
 const zoomImage = ref(null)
 const overlayRef = ref(null)
-const thumbnailRefs = ref([])
-
-const clickX = ref(0)
-const clickY = ref(0)
-
-const startX = ref(0)
-const endX = ref(0)
-const direction = ref('left')
 const isTransitioning = ref(false)
+const direction = ref('left')
 
-const onTouchStart = (e) => {
-  startX.value = e.touches[0].clientX
-}
-const onTouchMove = (e) => {
-  endX.value = e.touches[0].clientX
-}
-const onTouchEnd = () => {
-  const delta = endX.value - startX.value
-  const threshold = 50
-  if (delta < -threshold) {
-    direction.value = 'left'
-    next()
-  } else if (delta > threshold) {
-    direction.value = 'right'
-    prev()
-  }
-  startX.value = 0
-  endX.value = 0
-}
-
-const handleOpen = (index, event) => {
-  const { clientX, clientY } = event
-  clickX.value = clientX
-  clickY.value = clientY
-  gallery.openZoom(index)
-}
-
-const animateZoomIn = () => {
-  const zoomEl = zoomImage.value
-  const overlayEl = overlayRef.value
-  const zoomRect = zoomEl.getBoundingClientRect()
-
-  const dx = clickX.value - (zoomRect.left + zoomRect.width / 2)
-  const dy = clickY.value - (zoomRect.top + zoomRect.height / 2)
-
+const handleOpen = async (index, event) => {
+  zoomIndex.value = index
+  await nextTick()
   gsap.fromTo(
-      overlayEl,
+      zoomImage.value,
       { opacity: 0 },
-      { opacity: 1, duration: 0.3, ease: 'power2.out' }
-  )
-
-  gsap.fromTo(
-      zoomEl,
-      { x: dx, y: dy, scale: 0.3, opacity: 0 },
-      {
-        x: 0,
-        y: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        ease: 'power3.out'
-      }
+      { opacity: 1, duration: 0.4, ease: 'power2.out' }
   )
 }
 
 const handleClose = () => {
-  const thumbEl = thumbnailRefs.value[zoomIndex.value]
   const zoomEl = zoomImage.value
   const overlayEl = overlayRef.value
-
-  const thumbRect = thumbEl.getBoundingClientRect()
-  const zoomRect = zoomEl.getBoundingClientRect()
-  const dx = thumbRect.left - zoomRect.left
-  const dy = thumbRect.top - zoomRect.top
-  const sx = thumbRect.width / zoomRect.width
-  const sy = thumbRect.height / zoomRect.height
 
   gsap.to(overlayEl, {
     opacity: 0,
@@ -138,15 +81,11 @@ const handleClose = () => {
   })
 
   gsap.to(zoomEl, {
-    x: dx,
-    y: dy,
-    scaleX: sx,
-    scaleY: sy,
     opacity: 0,
     duration: 0.4,
     ease: 'power3.inOut',
     onComplete: () => {
-      gallery.closeZoom()
+      zoomIndex.value = null
     }
   })
 }
@@ -156,9 +95,7 @@ const next = async () => {
     isTransitioning.value = true
     direction.value = 'left'
     await transitionTo(zoomIndex.value + 1)
-    setTimeout(() => {
-      isTransitioning.value = false
-    }, 500)
+    setTimeout(() => (isTransitioning.value = false), 500)
   }
 }
 
@@ -167,15 +104,13 @@ const prev = async () => {
     isTransitioning.value = true
     direction.value = 'right'
     await transitionTo(zoomIndex.value - 1)
-    setTimeout(() => {
-      isTransitioning.value = false
-    }, 500)
+    setTimeout(() => (isTransitioning.value = false), 500)
   }
 }
 
 const transitionTo = async (newIndex) => {
-  const outX = direction.value === 'left' ? '-100%' : '100%'
-  const inX = direction.value === 'left' ? '100%' : '-100%'
+  const outX = direction.value === 'left' ? '-10%' : '10%'
+  const inX = direction.value === 'left' ? '10%' : '-10%'
 
   gsap.to(zoomImage.value, {
     x: outX,
@@ -183,17 +118,18 @@ const transitionTo = async (newIndex) => {
     scale: 0.95,
     duration: 0.25,
     ease: 'power1.in',
-    onStart: () => {
-      // případně: zoomVisible.value = false
-    },
     onComplete: async () => {
-      gallery.currentZoomIndex = newIndex
+      zoomIndex.value = newIndex
       await nextTick()
       gsap.fromTo(
           zoomImage.value,
           { x: inX, opacity: 0, scale: 0.95 },
           {
-            x: '0%', opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out'
+            x: '0%',
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: 'power2.out'
           }
       )
     }
@@ -202,7 +138,6 @@ const transitionTo = async (newIndex) => {
 </script>
 
 <style scoped>
-
 h2 {
   text-align: center;
   color: #AE4343;
@@ -210,15 +145,22 @@ h2 {
 
 .gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  position: relative;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   margin-top: 72px;
 }
+
 .gallery-item {
-  cursor: zoom-in;
+  cursor: pointer;
   overflow: hidden;
+  transition: transform 0.3s ease;
 }
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
 .gallery-item img {
   width: 100%;
   height: auto;
@@ -233,22 +175,16 @@ h2 {
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.overlay:has(.zoomed) {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .zoomed {
-  max-width: 90%;
-  max-height: 85%;
+  max-width: 1300px;
   border-radius: 6px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  transition: all 0.4s ease;
-  cursor: zoom-out;
 }
+
 .caption {
   position: absolute;
   bottom: 4rem;
@@ -265,6 +201,7 @@ h2 {
   font-size: 0.9rem;
   opacity: 0.7;
 }
+
 .nav {
   position: absolute;
   top: 50%;
@@ -293,12 +230,8 @@ h2 {
 }
 
 @media (max-width: 1024px) {
-  .gallery img {
-    max-width: 1024px;
-  }
-
-  .fullscreen img {
-    padding: 0 24px;
+  .gallery {
+    grid-template-columns: 1fr;
   }
 }
 </style>
