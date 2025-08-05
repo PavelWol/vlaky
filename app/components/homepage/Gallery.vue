@@ -18,21 +18,36 @@
           ref="overlayRef"
           @click.self="handleClose"
       >
-        <img
-            ref="zoomImage"
-            :src="currentImg.src"
-            :alt="currentImg.alt"
-            class="zoomed"
-            @click.stop
-        />
-        <div class="caption">
-          <p>{{ currentImg.alt }}</p>
-          <span>{{ zoomIndex + 1 }} / {{ images.length }}</span>
-        </div>
+        <div class="overlay-wrap">
+          <img
+              ref="zoomImage"
+              :src="currentImg.src"
+              :alt="currentImg.alt"
+              class="zoomed"
+              @click.stop
+          />
+          <div class="caption">
+            <p>{{ currentImg.alt }}</p>
+            <span>{{ zoomIndex + 1 }} / {{ images.length }}</span>
+          </div>
 
-        <button class="nav left" @click.stop="prev" v-if="zoomIndex > 0">‹</button>
-        <button class="nav right" @click.stop="next" v-if="zoomIndex < images.length - 1">›</button>
-        <button class="close-btn" @click="handleClose">×</button>
+
+          <svg class="close-btn" @click="handleClose" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.5" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="#353535"/>
+            <path d="M16 8L8 16M8.00001 8L16 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <svg @click.stop="prev" v-if="zoomIndex > 0" class="nav left" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.5" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="#353535"/>
+            <path d="M14 7L9 12L14 17M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <svg @click.stop="next" v-if="zoomIndex < images.length - 1" class="nav right" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.5" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="#353535"/>
+            <path d="M10 17L15 12L10 7M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+        </div>
       </div>
     </div>
   </div>
@@ -185,6 +200,10 @@ h2 {
   transition: opacity 0.3s ease;
 }
 
+.overlay-wrap {
+  position: relative;
+}
+
 .zoomed {
   max-width: 1300px;
   border-radius: 6px;
@@ -197,15 +216,19 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  color: #fff;
+  color: #FFF8ED;
+  background-color: rgba(53,53,53, 0.5);
+  border-radius: 6px;
+  padding: 8px;
 }
 .caption p {
   margin: 0;
   font-weight: bold;
+  font-size: 18px;
 }
 .caption span {
-  font-size: 0.9rem;
-  opacity: 0.7;
+  font-size: 14px;
+  font-family: "Readex Pro", sans-serif;
 }
 
 .nav {
@@ -218,26 +241,56 @@ h2 {
   color: white;
   cursor: pointer;
 }
+
 .nav.left {
   left: 2rem;
 }
+
 .nav.right {
   right: 2rem;
 }
+
 .close-btn {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: white;
   cursor: pointer;
+}
+
+svg {
+  width: 64px;
+  height: 64px;
+}
+
+button {
+  z-index: 2;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1; /* za buttonem */
 }
 
 @media (max-width: 1024px) {
   .gallery {
     grid-template-columns: 1fr;
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .caption {
+    bottom: 16px;
   }
 }
 </style>
