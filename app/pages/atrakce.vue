@@ -1,5 +1,6 @@
 <template>
   <div ref="atrakceRef" class="atrakce">
+    <BackgroundScroll />
     <div class="container">
       <SectionHeading
           color="red"
@@ -181,6 +182,7 @@ const cardData = [
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -204,7 +206,7 @@ onMounted(() => {
 <style scoped>
 
 .atrakce {
-  background-color: #FFF8ED;
+  position: relative;
 }
 
 .red {

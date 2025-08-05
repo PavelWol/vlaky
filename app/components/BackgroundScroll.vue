@@ -1,9 +1,9 @@
 <template>
 
   <div class="bg-wrapper">
-    <VectorOne class="vector v1" width="500px" height="500px" />
-    <VectorTwo class="vector v2" width="500px" height="500px" />
-    <VectorThree class="vector v3" width="500px" height="500px" />
+    <VectorOne class="vector v1" width="50%" height="50%" />
+    <VectorTwo class="vector v2" width="75%" height="75%" />
+    <VectorThree class="vector v3" width="50%" height="50%" />
   </div>
 
 </template>
@@ -30,10 +30,11 @@ defineProps({
 
 onMounted(() => {
   gsap.to(".v1", {
-    yPercent: -20,
+    yPercent: -100,
+    xPercent: -100,
     ease: "none",
-    rotation: 155,
-    translate: '150%',
+    rotation: 45,
+    translate: '100%',
     scrollTrigger: {
       trigger: ".bg-wrapper",
       // start: "top bottom", // the default values
@@ -44,10 +45,8 @@ onMounted(() => {
   });
 
   gsap.to(".v2", {
-    yPercent: -20,
     ease: "none",
-    rotationX: 250,
-    translate: '150%',
+    translate: '20%',
     scrollTrigger: {
       trigger: ".bg-wrapper",
       // start: "top bottom", // the default values
@@ -58,9 +57,10 @@ onMounted(() => {
   });
 
   gsap.to(".v3", {
-    yPercent: -20,
+    yPercent: 50,
+    xPercent: -250,
     ease: "none",
-    rotation: 90,
+    rotation: 180,
     translate: '150%',
     scrollTrigger: {
       trigger: ".bg-wrapper",
@@ -83,6 +83,7 @@ onMounted(() => {
   height: 100%;
   position: absolute;
   overflow: hidden;
+  z-index: -1;
 }
 
 .vector {
@@ -92,15 +93,19 @@ onMounted(() => {
 .v1 {
   top: 0;
   left: 0;
+  z-index: -1;
 }
 
 .v2 {
   top: 25%;
+  right: 0;
+  z-index: -1;
 }
 
 .v3 {
   bottom: 10%;
   left: 25%;
+  z-index: -1;
 }
 
 </style>

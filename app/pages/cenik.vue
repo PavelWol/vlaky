@@ -25,8 +25,6 @@ import BackgroundScroll from "~/components/BackgroundScroll.vue";
 .cenik-page {
   font-family: sans-serif;
   line-height: 180%;
-  background: #FFF8ED;
-  background-color: #353535;
   text-align: center;
   position: relative;
 }

@@ -1,6 +1,7 @@
 <template>
 
   <section id="story" class="story">
+    <BackgroundScroll />
     <div class="container">
       <SectionHeading
           color="red"
@@ -51,6 +52,8 @@
 <script setup lang="js">
 
 import SectionHeading from "~/components/ui/SectionHeading.vue";
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
+
 import {ref} from "vue";
 
 const videoSrc = ref('/video/train.mp4')
@@ -61,12 +64,11 @@ const videoAlt = ref('vlak')
 <style>
 
 .story {
-  background-color: #fff5ec;
-  background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
   color: #353535;
+  position: relative;
 }
 
 

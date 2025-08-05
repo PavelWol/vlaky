@@ -1,6 +1,7 @@
 <template>
 
   <div ref="skolyRef" class="skoly-skolky">
+    <BackgroundScroll />
     <div class="container">
       <SectionHeading
           color="red"
@@ -112,6 +113,7 @@ import Form from "~/components/interactive/Form.vue";
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -147,7 +149,7 @@ p {
 }
 
 .skoly-skolky {
-  background-color: #FFF8ED;
+  position: relative;
 }
 
 .red {
@@ -158,8 +160,8 @@ p {
   color: #ffffff;
 }
 
-.skoly-skolky > div:last-child {
-  padding-top: 0;
+.skoly-skolky > div.container:nth-last-child(2) {
+  padding-top: 0 !important;
 }
 
 </style>

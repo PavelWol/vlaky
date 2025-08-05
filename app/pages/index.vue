@@ -3,8 +3,11 @@
     <Hero />
     <OurStory />
     <LookForward />
-    <EventsNews />
-    <Gallery />
+    <div class="bg-container">
+      <BackgroundScroll class="gallery-pWrapper" />
+      <EventsNews />
+      <Gallery />
+    </div>
   </div>
 </template>
 
@@ -15,6 +18,9 @@ import OurStory from '~/components/homepage/OurStory.vue'
 import LookForward from '~/components/homepage/LookForward.vue'
 import EventsNews from "~/components/homepage/EventsNews.vue";
 import Gallery from "~/components/homepage/Gallery.vue";
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
+import {onMounted} from "vue";
+import gsap from "gsap";
 
 // import gsap from "gsap";
 // import {onMounted} from "vue";
@@ -31,6 +37,51 @@ import Gallery from "~/components/homepage/Gallery.vue";
 //     });
 //   });
 // })
+
+onMounted(() => {
+  gsap.to(".v1", {
+    yPercent: -100,
+    xPercent: -100,
+    ease: "none",
+    rotation: 45,
+    translate: '100%',
+    scrollTrigger: {
+      trigger: ".gallery-pWrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v2", {
+    ease: "none",
+    translate: '20%',
+    scrollTrigger: {
+      trigger: ".gallery-pWrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v3", {
+    yPercent: 50,
+    xPercent: -250,
+    ease: "none",
+    rotation: 180,
+    translate: '150%',
+    scrollTrigger: {
+      trigger: ".gallery-pWrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  })
+})
+
 
 </script>
 

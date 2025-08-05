@@ -1,6 +1,7 @@
 <template>
 
   <div ref="oslavyRef" class="oslavy">
+    <BackgroundScroll />
     <div class="container">
       <SectionHeading
           color="red"
@@ -52,6 +53,7 @@ import Form from "~/components/interactive/Form.vue";
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -77,7 +79,7 @@ onMounted(() => {
 
 
 .oslavy {
-  background-color: #FFF8ED;
+  position: relative;
 }
 
 :deep(.grid) {

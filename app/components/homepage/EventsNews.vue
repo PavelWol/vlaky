@@ -1,6 +1,7 @@
 <template>
 
   <section class="features">
+<!--    <BackgroundScroll />-->
     <div class="container pSection">
       <h2>Akce a aktuality</h2>
 
@@ -32,14 +33,15 @@
 <script setup lang="ts">
 
 import LookForwardItem from "~/components/interactive/LookForwardItem.vue";
-import PrimaryButton from "~/components/interactive/button/PrimaryButton.vue";
-import { useRouter } from 'vue-router'
 import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
+
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 const onButtonClick = () => {
-  // můžeš třeba navigovat nebo otevřít modální okno
+  // můžu navigovat nebo otevřít modal okno
   setTimeout(() => {
     router.push('/aktuality')
   }, 0)
@@ -50,12 +52,12 @@ const onButtonClick = () => {
 <style scoped>
 
 .features {
-  background-color: #FFF8ED;
-  background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
+  /* background-image: url('/images/backgrounds/bg1.png'); /* pozadí */
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
   color: #333;
+  position: relative;
 }
 
 .features h2 {

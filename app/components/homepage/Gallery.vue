@@ -36,6 +36,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script setup>
@@ -138,6 +139,11 @@ const transitionTo = async (newIndex) => {
 </script>
 
 <style scoped>
+
+.gallery-wrapper {
+  position: relative;
+}
+
 h2 {
   text-align: center;
   color: #AE4343;
