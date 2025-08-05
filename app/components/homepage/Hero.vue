@@ -133,7 +133,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 218px;
-  color: white;
+  color: #FFF8ED;
   overflow: hidden;
   height: 100vh;
 }

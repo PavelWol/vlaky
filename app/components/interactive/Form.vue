@@ -54,7 +54,7 @@ const handleSubmit = () => {
 
 .intro-text {
   margin: 24px auto 40px auto;
-  color: #ffffff;
+  color: #FFF8ED;
 }
 
 .contact-form {

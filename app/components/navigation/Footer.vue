@@ -94,7 +94,7 @@ footer h4 {
 
 footer a {
   display: block;
-  color: #ffffff;
+  color: #FFF8ED;
   font-size: 24px;
   line-height: 180%;
 }
@@ -104,7 +104,7 @@ footer span {
 }
 
 footer p {
-  color: #ffffff;
+  color: #FFF8ED;
   margin: 64px 0 0 0;
 }
 

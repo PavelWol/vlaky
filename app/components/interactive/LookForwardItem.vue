@@ -40,7 +40,7 @@ onMounted(() => {
 
 </script>
 
-<style>
+<style scoped>
 
 .card {
   border-radius: 16px;

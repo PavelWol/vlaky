@@ -213,12 +213,16 @@ onMounted(() => {
   background-color: #AE4343;
 }
 
+.red p {
+  color: #FFF8ED;
+}
+
 .green {
   background-color: #124432;
 }
 
 .green p {
-  color: #ffffff;
+  color: #FFF8ED;
 }
 
 .card :deep(h3) {

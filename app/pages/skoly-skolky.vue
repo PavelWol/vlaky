@@ -157,7 +157,7 @@ p {
 }
 
 .red p {
-  color: #ffffff;
+  color: #FFF8ED;
 }
 
 .skoly-skolky > div.container:nth-last-child(2) {

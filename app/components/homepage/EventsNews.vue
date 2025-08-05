@@ -1,23 +1,23 @@
 <template>
 
   <section class="features">
-<!--    <BackgroundScroll />-->
-    <div class="container pSection">
+
+    <div class="container">
       <h2>Akce a aktuality</h2>
 
       <div class="cards">
 
-        <LookForwardItem
+        <CardItem
           image="/images/gallery/2.png"
           heading="Historický motorák"
         />
 
-        <LookForwardItem
+        <CardItem
           image="/images/gallery/2.png"
           heading="Zábavní park"
         />
 
-        <LookForwardItem
+        <CardItem
           image="/images/gallery/2.png"
           heading="Šlapací drezína"
         />
@@ -32,20 +32,12 @@
 </template>
 <script setup lang="ts">
 
-import LookForwardItem from "~/components/interactive/LookForwardItem.vue";
 import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
-import BackgroundScroll from "~/components/BackgroundScroll.vue";
+import CardItem from "~/components/interactive/CardItem.vue";
 
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
-const onButtonClick = () => {
-  // můžu navigovat nebo otevřít modal okno
-  setTimeout(() => {
-    router.push('/aktuality')
-  }, 0)
-}
 
 </script>
 
@@ -58,6 +50,10 @@ const onButtonClick = () => {
   text-align: center;
   color: #333;
   position: relative;
+}
+
+.features .container {
+  padding-bottom: 0 !important;
 }
 
 .features h2 {

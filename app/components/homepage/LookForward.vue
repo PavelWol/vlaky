@@ -73,7 +73,7 @@ export default defineComponent({
 .features .intro {
   max-width: 800px;
   margin: 0 auto 50px;
-  color: #353535;
+  color: #FFF8ED;
 }
 
 .container {

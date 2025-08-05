@@ -113,12 +113,6 @@ onMounted(() => {
   transition: color 0.3s;
 }
 
-.navbar .btn {
-  margin-top: 0;
-  background-color: #E5595B;
-  color: #ffffff;
-}
-
 .logo {
   width: 118px;
 }
@@ -150,7 +144,7 @@ onMounted(() => {
 }
 
 .white {
-  color: #ffffff !important;
+  color: #FFF8ED !important;
 }
 
 @media (max-width: 1024px) {

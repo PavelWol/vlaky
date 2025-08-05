@@ -22,7 +22,7 @@ defineProps({
   display: inline-block;
   padding: 20px 48px;
   background-color: #E5595B;
-  color: white;
+  color: #FFF8ED;
   border: 2px solid #E5595B;
   border-radius: 32px;
   text-decoration: none;
