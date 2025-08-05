@@ -2,8 +2,11 @@
 
   <div class="bg-wrapper">
     <VectorOne class="vector v1" width="50%" height="50%" />
-    <VectorTwo class="vector v2" width="75%" height="75%" />
+    <VectorTwo class="vector v2" width="50%" height="50%" />
     <VectorThree class="vector v3" width="50%" height="50%" />
+    <VectorFour class="vector v4" width="50%" height="50%" />
+    <VectorFive class="vector v5" width="50%" height="50%" />
+    <VectorSix class="vector v6" width="50%" height="50%" />
   </div>
 
 </template>
@@ -14,6 +17,9 @@
 import VectorOne from "~/components/VectorOne.vue";
 import VectorTwo from "~/components/VectorTwo.vue";
 import VectorThree from "~/components/VectorThree.vue";
+import VectorFour from "~/components/VectorFour.vue";
+import VectorFive from "~/components/VectorFive.vue";
+import VectorSix from "~/components/VectorSix.vue";
 
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -30,7 +36,7 @@ defineProps({
 
 onMounted(() => {
   gsap.to(".v1", {
-    yPercent: -100,
+    yPercent: -50,
     xPercent: -100,
     ease: "none",
     rotation: 45,
@@ -57,11 +63,52 @@ onMounted(() => {
   });
 
   gsap.to(".v3", {
-    yPercent: 50,
-    xPercent: -250,
     ease: "none",
-    rotation: 180,
+    rotation: -45,
+    translate: '10%',
+    scrollTrigger: {
+      trigger: ".bg-wrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v4", {
+    yPercent: 50,
+    xPercent: -150,
+    ease: "none",
+    rotationX: 45,
     translate: '150%',
+    scrollTrigger: {
+      trigger: ".bg-wrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v5", {
+    ease: "none",
+    rotation: 90,
+    translate: '20%',
+    scrollTrigger: {
+      trigger: ".bg-wrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v6", {
+    yPercent: 50,
+    xPercent: -50,
+    ease: "none",
+    rotation: 15,
+    translate: '50%',
     scrollTrigger: {
       trigger: ".bg-wrapper",
       // start: "top bottom", // the default values
@@ -103,8 +150,26 @@ onMounted(() => {
 }
 
 .v3 {
-  bottom: 10%;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.v4 {
+  top: -25%;
+  right: 0;
+  z-index: -1;
+}
+
+.v5 {
+  bottom: 0;
   left: 25%;
+  z-index: -1;
+}
+
+.v6 {
+  bottom: 25%;
+  left: 0;
   z-index: -1;
 }
 

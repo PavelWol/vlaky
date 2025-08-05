@@ -40,10 +40,10 @@ import gsap from "gsap";
 
 onMounted(() => {
   gsap.to(".v1", {
-    yPercent: -100,
+    yPercent: -50,
     xPercent: -100,
     ease: "none",
-    rotation: 45,
+    rotation: -45,
     translate: '100%',
     scrollTrigger: {
       trigger: ".gallery-pWrapper",
@@ -67,10 +67,23 @@ onMounted(() => {
   });
 
   gsap.to(".v3", {
-    yPercent: 50,
-    xPercent: -250,
     ease: "none",
-    rotation: 180,
+    rotation: -45,
+    translate: '10%',
+    scrollTrigger: {
+      trigger: ".gallery-pWrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v4", {
+    yPercent: 50,
+    xPercent: -150,
+    ease: "none",
+    rotationX: 45,
     translate: '150%',
     scrollTrigger: {
       trigger: ".gallery-pWrapper",
@@ -79,13 +92,45 @@ onMounted(() => {
       scrub: true,
 
     },
-  })
+  });
+
+  gsap.to(".v5", {
+    ease: "none",
+    rotation: 90,
+    translate: '20%',
+    scrollTrigger: {
+      trigger: ".gallery-pWrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
+
+  gsap.to(".v6", {
+    yPercent: 50,
+    xPercent: -50,
+    ease: "none",
+    rotation: 15,
+    translate: '50%',
+    scrollTrigger: {
+      trigger: ".gallery-pWrapper",
+      // start: "top bottom", // the default values
+      // end: "bottom top",
+      scrub: true,
+
+    },
+  });
 })
 
 
 </script>
 
 <style>
+
+.gallery-pWrapper {
+  height: 175%;
+}
 
 
 </style>
