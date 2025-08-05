@@ -23,6 +23,7 @@ html {
 
 body {
   margin: 0;
+  background-color: #FFF8ED;
 }
 
 h1, h2, h3, h4, p {

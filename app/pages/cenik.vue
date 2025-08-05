@@ -1,5 +1,6 @@
 <template>
   <div class="cenik-page">
+    <BackgroundScroll />
     <div class="container">
 
       <PriceTable />
@@ -10,11 +11,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="js">
 
 import PriceTable from '~/components/table/PriceTable.vue'
 import TimeTable from '~/components/table/TimeTable.vue'
 import ContactInfo from "~/components/table/ContactInfo.vue";
+import BackgroundScroll from "~/components/BackgroundScroll.vue";
 
 </script>
 
@@ -24,7 +26,9 @@ import ContactInfo from "~/components/table/ContactInfo.vue";
   font-family: sans-serif;
   line-height: 180%;
   background: #FFF8ED;
+  background-color: #353535;
   text-align: center;
+  position: relative;
 }
 
 .section:not(:first-child) {

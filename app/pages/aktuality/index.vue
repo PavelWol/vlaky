@@ -6,9 +6,9 @@
           v-for="post in posts.posts"
           :key="post.slug"
           :to="`/aktuality/${post.slug}`"
-          class="block bg-white rounded shadow hover:shadow-lg transition overflow-hidden"
+          class="pImage"
       >
-        <img :src="post.image" :alt="post.title" class="w-full h-48 object-cover" />
+        <img :src="post.image" :alt="post.title" />
         <div class="text">
           <h3 class="">{{ post.title }}</h3>
           <p>{{ post.date }}</p>
@@ -25,12 +25,17 @@
   import { ref, onMounted } from 'vue'
   import gsap from 'gsap'
   import ScrollTrigger from 'gsap/ScrollTrigger'
+  import {ScrollSmoother} from "gsap/ScrollSmoother";
 
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
   const aktualityRef = ref(null)
 
   onMounted(() => {
+    const proxy = { skew: 0 }
+    const skewSetter = gsap.quickSetter(".pImage", "skewY", "deg")
+    const clamp = gsap.utils.clamp(-20, 20)
+
     gsap.from(aktualityRef.value, {
       scrollTrigger: {
         trigger: aktualityRef.value,
@@ -40,6 +45,36 @@
       opacity: 0.5,
       duration: 0.8,
       ease: 'power2.Out'
+    })
+
+    ScrollTrigger.create({
+      trigger: ".container",
+      start: "top top",
+      end: "bottom 150",
+      scrub: true,
+      onUpdate: (self) => {
+        const velocity = self.getVelocity()
+        const skew = clamp(velocity / -700)
+
+        if (Math.abs(skew) > Math.abs(proxy.skew)) {
+          proxy.skew = skew
+
+          gsap.to(proxy, {
+            skew: 0,
+            duration: 0.8,
+            ease: "power3",
+            overwrite: true,
+            onUpdate: () => {
+              skewSetter(proxy.skew)
+            }
+          })
+        }
+      }
+    })
+
+    gsap.set(".pImage", {
+      transformOrigin: "center center",
+      force3D: true
     })
   })
 
