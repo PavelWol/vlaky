@@ -84,4 +84,16 @@ onMounted(() => {
   color: #FFF8ED;
 }
 
+@media (max-width: 1024px) {
+  .cards {
+    flex-direction: column;
+  }
+
+  .pwrap {
+    max-width: 420px;
+    margin: 0 auto;
+    height: 280px;
+  }
+}
+
 </style>

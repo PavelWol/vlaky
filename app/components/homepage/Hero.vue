@@ -33,6 +33,7 @@ import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useState } from '#app'
+
 import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue";
 import PrimaryButton from "~/components/interactive/button/PrimaryButton.vue";
 

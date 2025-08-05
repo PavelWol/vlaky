@@ -19,6 +19,7 @@ import LookForward from '~/components/homepage/LookForward.vue'
 import EventsNews from "~/components/homepage/EventsNews.vue";
 import Gallery from "~/components/homepage/Gallery.vue";
 import BackgroundScroll from "~/components/BackgroundScroll.vue";
+
 import {onMounted} from "vue";
 import gsap from "gsap";
 
