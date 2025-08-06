@@ -1,7 +1,8 @@
 <template>
   <Navigation />
-  <slot />
+  <NuxtPage />
   <Footer />
+  <div ref="overlay" class="transition-overlay"></div>
 </template>
 
 <script setup lang="js">
@@ -9,9 +10,61 @@
 import Footer from '~/components/navigation/Footer.vue'
 import Navigation from '~/components/navigation/Navigation.vue'
 
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import { useRouter } from 'vue-router'
+
+const overlay = ref(null)
+const router = useRouter()
+
+onMounted(() => {
+  // Připoj listener na router
+  router.beforeEach((to, from, next) => {
+    // Spustíme animaci a počkáme, než skončí
+    gsap.to(overlay.value, {
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        next()
+      }
+    })
+  })
+
+  // Po načtení nové stránky, skryj overlay zpět
+  router.afterEach(() => {
+    gsap.to(overlay.value, {
+      y: '-100%',
+      duration: 0.6,
+      ease: 'power2.inOut'
+    })
+  })
+})
+
 </script>
 
 <style>
+
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFF8ED;
+  z-index: 9999;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
 * {
   box-sizing: border-box;

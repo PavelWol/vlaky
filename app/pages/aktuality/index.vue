@@ -1,5 +1,5 @@
 <template>
-  <div ref="aktualityRef" class="container">
+  <div class="container">
     <h2>Akce a aktuality</h2>
     <div class="aktuality">
       <NuxtLink
@@ -35,17 +35,6 @@
     const proxy = { skew: 0 }
     const skewSetter = gsap.quickSetter(".pImage", "skewY", "deg")
     const clamp = gsap.utils.clamp(-20, 20)
-
-    gsap.from(aktualityRef.value, {
-      scrollTrigger: {
-        trigger: aktualityRef.value,
-        start: 'top 80%',
-      },
-      x: -20,
-      opacity: 0.5,
-      duration: 0.8,
-      ease: 'power2.Out'
-    })
 
     ScrollTrigger.create({
       trigger: ".container",
