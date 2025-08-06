@@ -18,11 +18,23 @@ const overlay = ref(null)
 const router = useRouter()
 
 onMounted(() => {
-  // Připoj listener na router
+  if (!process.client) return
+
+  // Výchozí stav
+  gsap.set(overlay.value, { x: '-100%' })
+
   router.beforeEach((to, from, next) => {
-    // Spustíme animaci a počkáme, než skončí
+    // ✅ Detekce desktopu
+    const isDesktop = window.innerWidth >= 1024
+
+    if (!isDesktop) {
+      next() // 👉 okamžité přepnutí na mobilu/tabletu
+      return
+    }
+
+    // ✅ Animace pro desktop
     gsap.to(overlay.value, {
-      y: 0,
+      x: 0,
       duration: 0.6,
       ease: 'power2.inOut',
       onComplete: () => {
@@ -31,10 +43,11 @@ onMounted(() => {
     })
   })
 
-  // Po načtení nové stránky, skryj overlay zpět
   router.afterEach(() => {
+    if (!process.client || window.innerWidth < 1024) return
+
     gsap.to(overlay.value, {
-      y: '-100%',
+      x: '-100%',
       duration: 0.6,
       ease: 'power2.inOut'
     })
@@ -49,21 +62,12 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: #FFF8ED;
   z-index: 9999;
-  transform: translateY(-100%);
+  transform: translateX(-100%);
   pointer-events: none;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 
 * {
