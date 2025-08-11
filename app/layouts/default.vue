@@ -2,72 +2,81 @@
   <Navigation />
   <NuxtPage />
   <Footer />
-  <div ref="overlay" class="transition-overlay"></div>
+
+  <!-- Overlay wrapper (kvůli centru a stacking) -->
+  <div class="paper-overlay" ref="overlay">
+    <div class="paper-sheet"></div>
+  </div>
 </template>
 
 <script setup lang="js">
-
-import Footer from '~/components/navigation/Footer.vue'
-import Navigation from '~/components/navigation/Navigation.vue'
-
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import { useRouter } from 'vue-router'
+import Footer from '~/components/navigation/Footer.vue'
 
 const overlay = ref(null)
 const router = useRouter()
 
+const D_IN = 0.9   // pomalejší vjezd
+const D_OUT = 1.1  // pomalejší výjezd
+const EASE = 'power1.inOut'
+
+function tween(target, vars) {
+  return new Promise(resolve => {
+    gsap.to(target, { ...vars, onComplete: resolve })
+  })
+}
+
 onMounted(() => {
   if (!process.client) return
 
-  // Výchozí stav
-  gsap.set(overlay.value, { x: '-100%' })
+  // start: schovaný nad viewportem
+  gsap.set(overlay.value, { yPercent: -110 })
 
-  router.beforeEach((to, from, next) => {
-    // ✅ Detekce desktopu
-    const isDesktop = window.innerWidth >= 1024
+  // 1) PŘED NAVIGACÍ – nejdřív zakryj, pak teprve přepni
+  router.beforeEach(async (to, from, next) => {
+    try {
+      // jen desktop?
+      if (window.innerWidth < 1024) return next()
 
-    if (!isDesktop) {
-      next() // 👉 okamžité přepnutí na mobilu/tabletu
-      return
+      await tween(overlay.value, { yPercent: 0, duration: D_IN, ease: EASE })
+      next() // teprve teď dovolíme přepnutí stránky
+    } catch {
+      next()
     }
-
-    // ✅ Animace pro desktop
-    gsap.to(overlay.value, {
-      x: 0,
-      duration: 0.6,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        next()
-      }
-    })
   })
 
+  // 2) PO NAVIGACI – odkryj (overlay odjede dolů a reset zpět nahoru)
   router.afterEach(() => {
-    if (!process.client || window.innerWidth < 1024) return
+    // jen desktop?
+    if (window.innerWidth < 1024) return
 
-    gsap.to(overlay.value, {
-      x: '-100%',
-      duration: 0.6,
-      ease: 'power2.inOut'
-    })
+    gsap.timeline()
+        .to(overlay.value, { yPercent: 110, duration: D_OUT, ease: EASE })
+        .set(overlay.value, { yPercent: -110 })
   })
 })
-
 </script>
 
 <style>
 
-.transition-overlay {
+/* wrapper přes celou plochu kvůli animaci listu papíru */
+.paper-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #FFF8ED;
+  inset: 0;
   z-index: 9999;
-  transform: translateX(-100%);
   pointer-events: none;
+  display: grid;
+  place-items: center; /* aby „papír“ byl uprostřed (pro hezčí stín) */
+  /* startovní transform je řízen GSAPem */
+}
+.paper-sheet {
+  width: 102vw;            /* mírně širší než viewport, ať nepřečuhují okraje při subpixelech */
+  height: 110vh;           /* lehce vyšší, ať spolehlivě překryje */
+  background: #FFF8ED;
+  border-radius: 14px;
+  background-size: 4px 4px;
 }
 
 * {
