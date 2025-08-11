@@ -173,4 +173,10 @@ onMounted(() => {
   z-index: -1;
 }
 
+@media (max-width: 1024px) {
+  .vector {
+    height: 300px;
+  }
+}
+
 </style>

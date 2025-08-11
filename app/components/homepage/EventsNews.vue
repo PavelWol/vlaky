@@ -1,6 +1,6 @@
 <template>
 
-  <section class="features">
+  <section ref="eventRef" class="features">
 
     <div class="container">
       <h2>Akce a aktuality</h2>
@@ -36,8 +36,29 @@ import SecondaryButton from "~/components/interactive/button/SecondaryButton.vue
 import CardItem from "~/components/interactive/CardItem.vue";
 
 import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const router = useRouter()
+
+gsap.registerPlugin(ScrollTrigger)
+
+const eventRef = ref(null)
+
+onMounted(() => {
+  gsap.from(eventRef.value, {
+    scrollTrigger: {
+      trigger: eventRef.value,
+      start: 'top 50%',
+    },
+    x: -20,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.Out',
+    markers: true
+  })
+})
 
 </script>
 

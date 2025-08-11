@@ -71,4 +71,11 @@ img {
   width: 100%;
 }
 
+@media (max-width: 1024px) {
+  .grid {
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+  }
+}
+
 </style>

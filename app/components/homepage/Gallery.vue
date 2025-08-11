@@ -31,20 +31,19 @@
             <span>{{ zoomIndex + 1 }} / {{ images.length }}</span>
           </div>
 
-
           <svg class="close-btn" @click="handleClose" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path opacity="0.5" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="#353535"/>
-            <path d="M16 8L8 16M8.00001 8L16 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 8L8 16M8.00001 8L16 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#FFF8ED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
 
           <svg @click.stop="prev" v-if="zoomIndex > 0" class="nav left" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path opacity="0.5" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="#353535"/>
-            <path d="M14 7L9 12L14 17M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 7L9 12L14 17M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#FFF8ED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
 
           <svg @click.stop="next" v-if="zoomIndex < images.length - 1" class="nav right" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path opacity="0.5" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="#353535"/>
-            <path d="M10 17L15 12L10 7M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 17L15 12L10 7M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#FFF8ED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
 
         </div>
@@ -216,7 +215,6 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  color: #FFF8ED;
   background-color: rgba(53,53,53, 0.5);
   border-radius: 6px;
   padding: 8px;
@@ -225,10 +223,12 @@ h2 {
   margin: 0;
   font-weight: bold;
   font-size: 18px;
+  color: #FFF8ED;
 }
 .caption span {
   font-size: 14px;
   font-family: "Readex Pro", sans-serif;
+  color: #FFF8ED;
 }
 
 .nav {

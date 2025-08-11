@@ -39,7 +39,7 @@
     ScrollTrigger.create({
       trigger: ".container",
       start: "top top",
-      end: "bottom 150",
+      end: "bottom top",
       scrub: true,
       onUpdate: (self) => {
         const velocity = self.getVelocity()

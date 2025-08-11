@@ -14,10 +14,10 @@
       </div>
       <div class="btn-wrapper" >
         <div ref="btnRef1">
-          <PrimaryButton href="rezervace">Rezervace</PrimaryButton>
+          <PrimaryButton href="/rezervace">Rezervace</PrimaryButton>
         </div>
         <div ref="btnRef2">
-          <SecondaryButton href="#tesit-se">Více informací</SecondaryButton>
+          <SecondaryButton href="/atrakce">Více informací</SecondaryButton>
         </div>
       </div>
     </div>

@@ -75,5 +75,3 @@ th, td {
 }
 
 </style>
-<script setup lang="js">
-</script>

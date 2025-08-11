@@ -97,6 +97,14 @@ footer a {
   color: #FFF8ED;
   font-size: 24px;
   line-height: 180%;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+
+.contact-wrap div a:hover {
+  transform: translateX(5%);
+  transition: 0.3s ease-in-out;
+  color: #FFC779;
 }
 
 footer span {
